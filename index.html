@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RyGar Labs — Independent studio building native iOS apps and high-craft websites</title>
+<meta name="description" content="RyGar Labs is the studio of Ryan Garcia, building native iOS apps and high-craft websites for people who notice the details.">
+<meta name="theme-color" content="#0a0a0c">
+
+<meta property="og:title" content="RyGar Labs">
+<meta property="og:description" content="Independent studio building native iOS apps and high-craft websites.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rygarlabs.com">
+
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-elev: #131318;
+    --bg-card: #1a1a22;
+    --ink: #f0f0f4;
+    --ink-soft: #a4a4b0;
+    --ink-faint: #5e5e6e;
+    --border: #26262f;
+    --accent: #7cf5c4;
+    --accent-glow: rgba(124, 245, 196, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at 20% 0%, var(--accent-glow), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(124, 124, 245, 0.08), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+  .mono { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    background: rgba(10, 10, 12, 0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  .logo {
+    font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .logo-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--ink-soft); text-decoration: none; font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--bg);
+    padding: 0.5rem 1rem; border-radius: 6px;
+    font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    width: fit-content;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .badge:hover { border-color: var(--accent); }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  h1.display {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    max-width: 16ch;
+  }
+  h1.display .accent { color: var(--accent); }
+  .hero-lead {
+    max-width: 38rem;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--ink-soft); }
+
+  section { padding: 6rem 0; }
+  .section-eyebrow {
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  h2.section-title {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    max-width: 18ch;
+  }
+  .section-intro { color: var(--ink-soft); max-width: 36rem; margin-bottom: 4rem; font-size: 1.05rem; }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .work-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex; flex-direction: column; gap: 1.5rem;
+    min-height: 380px;
+  }
+  .work-card::before {
+    content: "";
+    position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .work-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .work-card:hover::before { opacity: 1; }
+  .work-card-visual {
+    aspect-ratio: 16 / 10;
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-faint);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+  .work-card-info { position: relative; z-index: 1; }
+  .work-card-meta {
+    display: flex; gap: 1rem;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.75rem;
+  }
+  .work-card h3 { font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+  .work-card p { color: var(--ink-soft); font-size: 0.95rem; }
+  .work-card-arrow {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+  .work-card:hover .work-card-arrow { gap: 0.75rem; }
+
+  .mission {
+    text-align: center;
+    padding: 8rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .mission-text {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    max-width: 26ch;
+    margin: 0 auto;
+  }
+  .mission-text .accent { color: var(--accent); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .service-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .service-card:hover { border-color: var(--ink-faint); }
+  .service-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .service-card h4 { font-size: 1.15rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+  .service-card p { color: var(--ink-soft); font-size: 0.9rem; }
+
+  .contact {
+    text-align: center;
+    padding: 8rem 0;
+  }
+  .contact h2 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    max-width: 18ch;
+    margin: 0 auto 2rem;
+  }
+  .contact h2 .accent { color: var(--accent); }
+  .contact-email {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    font-size: 1.25rem;
+    text-decoration: none;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  .contact-email:hover { text-decoration: underline; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links li:not(:last-child) { display: none; }
+    .work-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    RyGar Labs
+  </div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+</nav>
+
+<header class="hero container">
+  <a class="badge" href="https://apps.apple.com/us/app/asideo/id6773941568">
+    <span class="badge-dot"></span>
+    <span class="mono">Asideo is live on the App Store →</span>
+  </a>
+  <h1 class="display">
+    Software<br>
+    that earns its <span class="accent">space</span>.
+  </h1>
+  <p class="hero-lead">
+    RyGar Labs is the studio of Ryan Garcia — building native iOS apps and high-craft websites for people who notice the details.
+  </p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="#work">See the work →</a>
+    <a class="btn-secondary" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<section id="work">
+  <div class="container">
+    <div class="section-eyebrow">/ 01 — selected work</div>
+    <h2 class="section-title">Shipped, used, and reviewed.</h2>
+    <p class="section-intro">A small portfolio, carefully made. Each project is a deliberate answer to a question worth asking.</p>
+    <div class="work-grid">
+      <a class="work-card" href="https://apps.apple.com/us/app/asideo/id6773941568">
+        <div class="work-card-visual">[ Asideo product still ]</div>
+        <div class="work-card-info">
+          <div class="work-card-meta"><span>iOS</span><span>·</span><span>2026</span></div>
+          <h3>Asideo</h3>
+          <p>Hands-free voice notes. Back-tap to record, on-device transcription, AI-formatted summaries with Apple Intelligence.</p>
+        </div>
+        <span class="work-card-arrow">View on App Store →</span>
+      </a>
+      <a class="work-card" href="#">
+        <div class="work-card-visual">[ Coming soon ]</div>
+        <div class="work-card-info">
+          <div class="work-card-meta"><span>In progress</span></div>
+          <h3>More on the way</h3>
+          <p>The next project is in the studio. Web work, app concepts, and shipped products will land here as they're ready.</p>
+        </div>
+        <span class="work-card-arrow">Coming soon →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="container">
+    <div class="section-eyebrow">/ 02 — mission</div>
+    <p class="mission-text">
+      Build things people actually want to use. Then build them <span class="accent">better than they expected</span>.
+    </p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-eyebrow">/ 03 — what i do</div>
+    <h2 class="section-title">Three disciplines, one standard.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">{ }</div>
+        <h4>Native iOS</h4>
+        <p>SwiftUI apps, App Intents, Apple Intelligence integration, and App Store submission, end to end.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&lt;/&gt;</div>
+        <h4>Web Design & Build</h4>
+        <p>Premium marketing sites and product landing pages, designed and shipped — no template-store finishes.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◊</div>
+        <h4>Product Direction</h4>
+        <p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-eyebrow">/ 04 — start something</div>
+    <h2>Have an idea worth <span class="accent">making real</span>?</h2>
+    <a class="contact-email" href="mailto:ap3garcia@gmail.com">ap3garcia@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 RyGar Labs</span>
+  <span>// built by hand</span>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+</body>
+</html>
