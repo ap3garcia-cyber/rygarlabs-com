@@ -4,13 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RyGar Labs — Independent studio building native iOS apps and high-craft websites</title>
-<meta name="description" content="RyGar Labs is the studio of Ryan Garcia, building native iOS apps and high-craft websites for people who notice the details.">
+<meta name="description" content="RyGar Labs is an independent studio designing and building native iOS apps and marketing sites end-to-end. No handoffs, no template starts.">
 <meta name="theme-color" content="#0a0a0c">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <meta property="og:title" content="RyGar Labs">
 <meta property="og:description" content="Independent studio building native iOS apps and high-craft websites.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rygarlabs.com">
+<meta property="og:image" content="https://rygarlabs.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RyGar Labs — Software that earns its space.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RyGar Labs">
+<meta name="twitter:description" content="Independent studio building native iOS apps and high-craft websites.">
+<meta name="twitter:image" content="https://rygarlabs.com/og-image.png">
 
 <style>
   :root {
@@ -78,6 +91,34 @@
     font-weight: 500;
   }
   .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
+
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .nav-toggle:hover { border-color: var(--ink-faint); }
+  .nav-toggle span {
+    display: block;
+    position: absolute;
+    left: 10px;
+    width: 20px; height: 1.5px;
+    background: var(--ink);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+  }
+  .nav-toggle span:nth-child(1) { top: 14px; }
+  .nav-toggle span:nth-child(2) { top: 19px; }
+  .nav-toggle span:nth-child(3) { top: 24px; }
+  body.nav-open .nav-toggle span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+  body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.nav-open .nav-toggle span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
 
   .hero {
     min-height: 100vh;
@@ -156,7 +197,7 @@
 
   .work-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   .work-card {
@@ -169,8 +210,10 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
-    display: flex; flex-direction: column; gap: 1.5rem;
-    min-height: 380px;
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) 1fr;
+    gap: 2.5rem;
+    align-items: center;
   }
   .work-card::before {
     content: "";
@@ -184,9 +227,9 @@
   .work-card:hover { border-color: var(--accent); transform: translateY(-4px); }
   .work-card:hover::before { opacity: 1; }
   .work-card-visual {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 720 / 1557;
     background: var(--bg-card);
-    border-radius: 8px;
+    border-radius: 16px;
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--ink-faint);
@@ -194,8 +237,15 @@
     font-size: 0.8rem;
     position: relative;
     z-index: 1;
+    overflow: hidden;
   }
-  .work-card-info { position: relative; z-index: 1; }
+  .work-card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .work-card-info { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.5rem; }
   .work-card-meta {
     display: flex; gap: 1rem;
     font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
@@ -203,16 +253,28 @@
     color: var(--ink-faint);
     margin-bottom: 0.75rem;
   }
-  .work-card h3 { font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
-  .work-card p { color: var(--ink-soft); font-size: 0.95rem; }
-  .work-card-arrow {
-    margin-top: auto;
+  .work-card h3 { font-size: 1.75rem; letter-spacing: -0.015em; }
+  .work-card h3 a { color: inherit; text-decoration: none; }
+  .work-card h3 a:hover { color: var(--accent); }
+  .work-card p { color: var(--ink-soft); font-size: 1rem; }
+  .work-card-visual { text-decoration: none; }
+  .work-card-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .work-card-link {
     color: var(--accent);
+    text-decoration: none;
     font-size: 0.9rem;
     display: inline-flex; align-items: center; gap: 0.4rem;
-    transition: gap 0.2s;
+    transition: gap 0.2s, color 0.2s;
   }
-  .work-card:hover .work-card-arrow { gap: 0.75rem; }
+  .work-card-link:hover { gap: 0.75rem; }
+  .work-card-link--secondary { color: var(--ink-soft); }
+  .work-card-link--secondary:hover { color: var(--ink); }
 
   .mission {
     text-align: center;
@@ -270,15 +332,99 @@
     margin: 0 auto 2rem;
   }
   .contact h2 .accent { color: var(--accent); }
-  .contact-email {
-    display: inline-block;
-    margin-top: 1rem;
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .email-pill {
+    display: inline-flex;
+    align-items: stretch;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    transition: border-color 0.2s;
+  }
+  .email-pill:hover { border-color: var(--ink-faint); }
+  .email-pill .email-address {
+    padding: 0.85rem 0.5rem 0.85rem 1.5rem;
     color: var(--accent);
-    font-size: 1.25rem;
+    font-size: 1rem;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .email-pill .email-address:hover { color: var(--ink); }
+  .email-pill .copy-btn {
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 0 1.25rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s, background 0.2s;
+  }
+  .email-pill .copy-btn:hover { color: var(--accent); background: rgba(124, 245, 196, 0.06); }
+  .email-pill .copy-btn:active { background: rgba(124, 245, 196, 0.12); }
+  .email-pill .copy-btn .copy-icon { width: 14px; height: 14px; }
+  .contact-meta {
+    color: var(--ink-faint);
+    font-size: 0.85rem;
     font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
   }
-  .contact-email:hover { text-decoration: underline; }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, 1rem);
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger > .reveal { transition-delay: 0ms; }
+  .reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+  .reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+  .reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.in-view {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 
   footer {
     border-top: 1px solid var(--border);
@@ -290,8 +436,54 @@
   }
 
   @media (max-width: 768px) {
-    .nav-links li:not(:last-child) { display: none; }
-    .work-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      background: rgba(10, 10, 12, 0.97);
+      backdrop-filter: blur(20px);
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    body.nav-open .nav-links {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .nav-links li {
+      width: 100%;
+      text-align: center;
+    }
+    .nav-links a {
+      display: block;
+      font-size: 1.5rem;
+      padding: 1.25rem 2rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .nav-links .nav-cta {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 1rem;
+      padding: 0.75rem 1.75rem;
+      color: var(--bg);
+    }
+    body.nav-open { overflow: hidden; }
+
+    .work-card {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .work-card-visual {
+      aspect-ratio: 720 / 1557;
+      max-width: 240px;
+      margin: 0 auto;
+    }
     .services-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -303,12 +495,15 @@
     <span class="logo-dot"></span>
     RyGar Labs
   </div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#mission">Mission</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <header class="hero container">
@@ -321,7 +516,7 @@
     that earns its <span class="accent">space</span>.
   </h1>
   <p class="hero-lead">
-    RyGar Labs is the studio of Ryan Garcia — building native iOS apps and high-craft websites for people who notice the details.
+    Native iOS apps and marketing sites, designed and built end-to-end. One studio, no handoffs, no template starts.
   </p>
   <div class="hero-cta">
     <a class="btn-primary" href="#work">See the work →</a>
@@ -331,36 +526,32 @@
 
 <section id="work">
   <div class="container">
-    <div class="section-eyebrow">/ 01 — selected work</div>
-    <h2 class="section-title">Shipped, used, and reviewed.</h2>
-    <p class="section-intro">A small portfolio, carefully made. Each project is a deliberate answer to a question worth asking.</p>
+    <div class="section-eyebrow reveal">/ 01 — selected work</div>
+    <h2 class="section-title reveal">Shipped and live.</h2>
+    <p class="section-intro reveal">Asideo is the first public release from the studio. More projects land here as they ship — no placeholder filler.</p>
     <div class="work-grid">
-      <a class="work-card" href="https://apps.apple.com/us/app/asideo/id6773941568">
-        <div class="work-card-visual">[ Asideo product still ]</div>
+      <article class="work-card reveal">
+        <a class="work-card-visual" href="/asideo/" aria-label="Read the Asideo case study">
+          <img src="assets/asideo-hero.jpg" alt="Asideo app on iPhone — hands-free voice notes with AI-formatted summaries" loading="lazy">
+        </a>
         <div class="work-card-info">
-          <div class="work-card-meta"><span>iOS</span><span>·</span><span>2026</span></div>
-          <h3>Asideo</h3>
-          <p>Hands-free voice notes. Back-tap to record, on-device transcription, AI-formatted summaries with Apple Intelligence.</p>
+          <div class="work-card-meta"><span>iOS</span><span>·</span><span>2026</span><span>·</span><span>Live on App Store</span></div>
+          <h3><a href="/asideo/">Asideo</a></h3>
+          <p>Hands-free voice notes for iOS. Back-tap to record, on-device transcription, and AI-formatted summaries powered by Apple Intelligence — built and shipped end to end.</p>
+          <div class="work-card-actions">
+            <a class="work-card-link" href="/asideo/">Read the case study →</a>
+            <a class="work-card-link work-card-link--secondary" href="https://apps.apple.com/us/app/asideo/id6773941568">App Store ↗</a>
+          </div>
         </div>
-        <span class="work-card-arrow">View on App Store →</span>
-      </a>
-      <a class="work-card" href="#">
-        <div class="work-card-visual">[ Coming soon ]</div>
-        <div class="work-card-info">
-          <div class="work-card-meta"><span>In progress</span></div>
-          <h3>More on the way</h3>
-          <p>The next project is in the studio. Web work, app concepts, and shipped products will land here as they're ready.</p>
-        </div>
-        <span class="work-card-arrow">Coming soon →</span>
-      </a>
+      </article>
     </div>
   </div>
 </section>
 
 <section class="mission" id="mission">
   <div class="container">
-    <div class="section-eyebrow">/ 02 — mission</div>
-    <p class="mission-text">
+    <div class="section-eyebrow reveal">/ 02 — mission</div>
+    <p class="mission-text reveal">
       Build things people actually want to use. Then build them <span class="accent">better than they expected</span>.
     </p>
   </div>
@@ -368,20 +559,20 @@
 
 <section id="services">
   <div class="container">
-    <div class="section-eyebrow">/ 03 — what i do</div>
-    <h2 class="section-title">Three disciplines, one standard.</h2>
-    <div class="services-grid">
-      <div class="service-card">
+    <div class="section-eyebrow reveal">/ 03 — what i do</div>
+    <h2 class="section-title reveal">Three disciplines, one standard.</h2>
+    <div class="services-grid reveal-stagger">
+      <div class="service-card reveal">
         <div class="service-icon">{ }</div>
         <h4>Native iOS</h4>
         <p>SwiftUI apps, App Intents, Apple Intelligence integration, and App Store submission, end to end.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-icon">&lt;/&gt;</div>
         <h4>Web Design & Build</h4>
         <p>Premium marketing sites and product landing pages, designed and shipped — no template-store finishes.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-icon">◊</div>
         <h4>Product Direction</h4>
         <p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p>
@@ -392,11 +583,25 @@
 
 <section class="contact" id="contact">
   <div class="container">
-    <div class="section-eyebrow">/ 04 — start something</div>
-    <h2>Have an idea worth <span class="accent">making real</span>?</h2>
-    <a class="contact-email" href="mailto:ap3garcia@gmail.com">ap3garcia@gmail.com</a>
+    <div class="section-eyebrow reveal">/ 04 — start something</div>
+    <h2 class="reveal">Have an idea worth <span class="accent">making real</span>?</h2>
+    <div class="contact-actions reveal">
+      <div class="email-pill">
+        <a class="email-address" href="mailto:ap3garcia@gmail.com">ap3garcia@gmail.com</a>
+        <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard" data-email="ap3garcia@gmail.com">
+          <svg class="copy-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/>
+          </svg>
+          <span class="copy-btn-label">Copy</span>
+        </button>
+      </div>
+      <p class="contact-meta">Typically replies within 24 hours · Based in the U.S.</p>
+    </div>
   </div>
 </section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <footer>
   <span>© 2026 RyGar Labs</span>
@@ -408,6 +613,63 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   });
+
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  const setNavOpen = (open) => {
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  navToggle.addEventListener('click', () => {
+    setNavOpen(!document.body.classList.contains('nav-open'));
+  });
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setNavOpen(false));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      setNavOpen(false);
+    }
+  });
+
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  const showToast = (message) => {
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  };
+
+  const copyBtn = document.getElementById('copy-email');
+  const copyLabel = copyBtn.querySelector('.copy-btn-label');
+  copyBtn.addEventListener('click', async () => {
+    const email = copyBtn.dataset.email;
+    try {
+      await navigator.clipboard.writeText(email);
+      copyLabel.textContent = 'Copied';
+      showToast('Email copied to clipboard');
+      setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2200);
+    } catch (err) {
+      showToast('Copy failed — long-press the email instead');
+    }
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach((el) => revealObserver.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add('in-view'));
+  }
 </script>
 </body>
 </html>
