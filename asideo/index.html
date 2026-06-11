@@ -175,42 +175,27 @@
     font-size: 0.95rem;
   }
 
-  .name-history {
-    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  .scope-shift {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
     align-items: center;
     margin: 1.5rem 0 2rem;
     font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
-  .name-pill {
+  .scope-pill {
     background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: 999px;
     padding: 0.4rem 0.9rem;
-    color: var(--ink-soft);
-    text-decoration: line-through;
-    text-decoration-color: var(--ink-faint);
+    color: var(--ink-faint);
   }
-  .name-pill.final {
+  .scope-pill.kept {
     color: var(--bg);
     background: var(--accent);
     border-color: var(--accent);
-    text-decoration: none;
     font-weight: 500;
   }
-  .name-arrow { color: var(--ink-faint); }
-
-  .draft-note {
-    margin: 4rem 0 0;
-    padding: 1.25rem 1.5rem;
-    background: rgba(124, 245, 196, 0.05);
-    border: 1px solid rgba(124, 245, 196, 0.25);
-    border-radius: 10px;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  }
-  .draft-note strong { color: var(--accent); }
+  .scope-arrow { color: var(--ink-faint); }
 
   .next-cta {
     border-top: 1px solid var(--border);
@@ -344,31 +329,26 @@
       iOS 26.4 as the minimum is the load-bearing decision. It cuts off a chunk of the install base, but it's what unlocks the privacy story (nothing leaves the device) and the framing (Apple Intelligence, not a third-party LLM). The trade-off was made deliberately: a smaller addressable market for a meaningfully better product, with room to relax the OS floor as adoption catches up.
     </p>
 
-    <h2>The naming journey</h2>
+    <h2>The pivot</h2>
     <p>
-      Asideo got here through four names. Each rename solved a real problem — trademark friction, audience confusion, search ambiguity in the App Store — and each one cost a full design pass on icon, brand, and copy.
+      Asideo didn't start this focused. An early version tried to do more — a soundboard sat alongside the capture flow, and the app's identity was split between "make sounds" and "make notes." It demoed fine. It just didn't have a point.
     </p>
-    <div class="name-history">
-      <span class="name-pill">iToot</span>
-      <span class="name-arrow">→</span>
-      <span class="name-pill">TapToot</span>
-      <span class="name-arrow">→</span>
-      <span class="name-pill">Tootify</span>
-      <span class="name-arrow">→</span>
-      <span class="name-pill final">Asideo</span>
+    <div class="scope-shift">
+      <span class="scope-pill">soundboard + voice notes + extras</span>
+      <span class="scope-arrow">→</span>
+      <span class="scope-pill kept">one hands-free capture flow</span>
     </div>
     <p>
-      "Asideo" suggests "an aside" — a quick thought made on the side of whatever else you're doing. It's the name that survived the third doubt, and the one that the product itself finally felt like.
+      The turning point was admitting that the soundboard was a different app wearing the same icon. Cutting it back to a secondary feature — and rebuilding everything around a single job, <span class="accent">talk and get a structured note</span> — is what made the privacy story, the trigger lineup, and the name all line up. The growth wasn't adding features. It was having the discipline to remove them.
     </p>
+    <div class="pullquote">
+      One job done well beats five done okay — and knowing which job is the whole game.
+    </div>
 
     <h2>What's next</h2>
     <p>
       The 1.0 release is small on purpose. The next moves are about depth, not breadth: more structured output formats people can pick from, better defaults based on what you actually capture, and tightening the latency between "stop talking" and "have a useful note."
     </p>
-
-    <div class="draft-note">
-      <strong>Draft note —</strong> this case study was scaffolded from project notes. Replace this with sections that only Ryan can speak to: what was surprising during the build, what trade-offs he'd revisit, what users said in TestFlight that changed the product. The frame is here; the voice goes in next.
-    </div>
 
   </div>
 </article>

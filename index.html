@@ -1,675 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RyGar Labs — Independent studio building native iOS apps and high-craft websites</title>
-<meta name="description" content="RyGar Labs is an independent studio designing and building native iOS apps and marketing sites end-to-end. No handoffs, no template starts.">
-<meta name="theme-color" content="#0a0a0c">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- ============================================================
+     RYGARLABS.COM — v2
+     ▸ Prices live in the PLANS section (search "EDIT PRICES")
+     ▸ Contact email is contact@rygarlabs.com (Cloudflare Email
+       Routing → forwards to ap3garcia@gmail.com)
+     ============================================================ -->
 
-<meta property="og:title" content="RyGar Labs">
-<meta property="og:description" content="Independent studio building native iOS apps and high-craft websites.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://rygarlabs.com">
-<meta property="og:image" content="https://rygarlabs.com/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="RyGar Labs — Software that earns its space.">
+<title>RyGar Labs — Websites, Apps &amp; Growth Services for Bowling Green Businesses</title>
+<meta name="description" content="RyGar Labs builds high-craft websites and runs monthly growth services — email, social, and Google Business — for local businesses in Bowling Green, KY. By the developer behind the Asideo iOS app."/>
+<meta name="keywords" content="web design Bowling Green KY, website developer Bowling Green, app developer Kentucky, social media management Bowling Green, Google Business profile management, email marketing for small business"/>
+<link rel="canonical" href="https://rygarlabs.com/"/>
+<meta name="theme-color" content="#0a0a0c"/>
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="RyGar Labs">
-<meta name="twitter:description" content="Independent studio building native iOS apps and high-craft websites.">
-<meta name="twitter:image" content="https://rygarlabs.com/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://rygarlabs.com"/>
+<meta property="og:title" content="RyGar Labs — Websites, Apps &amp; Growth Services in Bowling Green, KY"/>
+<meta property="og:description" content="High-craft websites and monthly growth services for local businesses. Built by hand by the developer behind the Asideo iOS app."/>
+<meta property="og:image" content="https://rygarlabs.com/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="RyGar Labs"/>
+<meta name="twitter:description" content="Websites &amp; growth services for Bowling Green businesses. Built by hand."/>
+<meta name="twitter:image" content="https://rygarlabs.com/og-image.png"/>
+
+<!-- Local SEO: structured data so Google understands what + where you serve -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "RyGar Labs",
+  "url": "https://rygarlabs.com",
+  "email": "contact@rygarlabs.com",
+  "description": "Independent studio building websites, native iOS apps, and monthly digital growth services for local businesses.",
+  "areaServed": [
+    { "@type": "City", "name": "Bowling Green", "containedInPlace": { "@type": "State", "name": "Kentucky" } },
+    { "@type": "State", "name": "Kentucky" }
+  ],
+  "priceRange": "$$",
+  "knowsAbout": ["Web design", "iOS app development", "Email marketing", "Social media management", "Google Business Profile management", "Local SEO"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
-  :root {
-    --bg: #0a0a0c;
-    --bg-elev: #131318;
-    --bg-card: #1a1a22;
-    --ink: #f0f0f4;
-    --ink-soft: #a4a4b0;
-    --ink-faint: #5e5e6e;
-    --border: #26262f;
-    --accent: #7cf5c4;
-    --accent-glow: rgba(124, 245, 196, 0.15);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: "";
-    position: fixed; inset: 0;
-    background: radial-gradient(circle at 20% 0%, var(--accent-glow), transparent 50%),
-                radial-gradient(circle at 80% 100%, rgba(124, 124, 245, 0.08), transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-  .mono { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; }
+:root{
+  --bg:#0a0a0c;
+  --bg-2:#101014;
+  --bg-3:#15151b;
+  --line:#222229;
+  --line-soft:#1a1a20;
+  --text:#ececf0;
+  --text-2:#9b9ba6;
+  --text-3:#5e5e6a;
+  --amber:#e3a14f;          /* growth-services accent */
+  --amber-soft:rgba(227,161,79,.12);
+  --green:#5fbf7a;
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --max:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block;border-radius:10px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:96px 0;border-top:1px solid var(--line-soft)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.12;letter-spacing:-.015em}
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    padding: 1.25rem 2rem;
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 100;
-    background: rgba(10, 10, 12, 0.7);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
-  nav.scrolled { border-bottom-color: var(--border); }
-  .logo {
-    font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .logo-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a {
-    color: var(--ink-soft); text-decoration: none; font-size: 0.875rem;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    background: var(--ink); color: var(--bg);
-    padding: 0.5rem 1rem; border-radius: 6px;
-    font-weight: 500;
-  }
-  .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
+/* eyebrows — kept from v1 brand language */
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--text-3);text-transform:lowercase;margin-bottom:22px}
+.eyebrow b{color:var(--amber);font-weight:500}
 
-  .nav-toggle {
-    display: none;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    width: 40px; height: 40px;
-    cursor: pointer;
-    padding: 0;
-    position: relative;
-    transition: border-color 0.2s;
-  }
-  .nav-toggle:hover { border-color: var(--ink-faint); }
-  .nav-toggle span {
-    display: block;
-    position: absolute;
-    left: 10px;
-    width: 20px; height: 1.5px;
-    background: var(--ink);
-    border-radius: 1px;
-    transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
-  }
-  .nav-toggle span:nth-child(1) { top: 14px; }
-  .nav-toggle span:nth-child(2) { top: 19px; }
-  .nav-toggle span:nth-child(3) { top: 24px; }
-  body.nav-open .nav-toggle span:nth-child(1) { top: 19px; transform: rotate(45deg); }
-  body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-  body.nav-open .nav-toggle span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--text-2)}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-family:var(--mono);font-size:12.5px;padding:9px 16px;border:1px solid var(--line);border-radius:8px;color:var(--text)}
+.nav-cta:hover{border-color:var(--amber);color:var(--amber)}
+@media(max-width:760px){.nav-links{display:none}}
 
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-  }
-  .badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    width: fit-content;
-    margin-bottom: 2rem;
-    text-decoration: none;
-    transition: border-color 0.2s;
-  }
-  .badge:hover { border-color: var(--accent); }
-  .badge-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-  h1.display {
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    max-width: 16ch;
-  }
-  h1.display .accent { color: var(--accent); }
-  .hero-lead {
-    max-width: 38rem;
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    margin-bottom: 3rem;
-  }
-  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary, .btn-secondary {
-    padding: 0.85rem 1.5rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-  }
-  .btn-primary { background: var(--accent); color: var(--bg); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
-  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--border); }
-  .btn-secondary:hover { border-color: var(--ink-soft); }
+/* ── hero ── */
+.hero{padding:110px 0 90px;border-top:none}
+.hero h1{font-size:clamp(42px,7vw,76px);font-weight:700;max-width:13ch}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero p{margin-top:26px;max-width:58ch;color:var(--text-2);font-size:18px}
+.hero-ctas{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15.5px;padding:14px 26px;border-radius:10px;transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.btn-amber{background:var(--amber);color:#1b1206}
+.btn-amber:hover{transform:translateY(-1px);background:#eeb066}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text-3)}
 
-  section { padding: 6rem 0; }
-  .section-eyebrow {
-    color: var(--accent);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  }
-  h2.section-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    max-width: 18ch;
-  }
-  .section-intro { color: var(--ink-soft); max-width: 36rem; margin-bottom: 4rem; font-size: 1.05rem; }
+/* shipped banner */
+.ship{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--text-2);border:1px solid var(--line);border-radius:99px;padding:8px 16px;margin-bottom:34px}
+.ship i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);font-style:normal}
+.ship:hover{border-color:var(--text-3)}
 
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .work-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    display: grid;
-    grid-template-columns: minmax(240px, 300px) 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-  .work-card::before {
-    content: "";
-    position: absolute; top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 40%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-  }
-  .work-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .work-card:hover::before { opacity: 1; }
-  .work-card-visual {
-    aspect-ratio: 720 / 1557;
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink-faint);
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-    font-size: 0.8rem;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
-  .work-card-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .work-card-info { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-  .work-card-meta {
-    display: flex; gap: 1rem;
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-    font-size: 0.75rem;
-    color: var(--ink-faint);
-    margin-bottom: 0.75rem;
-  }
-  .work-card h3 { font-size: 1.75rem; letter-spacing: -0.015em; }
-  .work-card h3 a { color: inherit; text-decoration: none; }
-  .work-card h3 a:hover { color: var(--accent); }
-  .work-card p { color: var(--ink-soft); font-size: 1rem; }
-  .work-card-visual { text-decoration: none; }
-  .work-card-actions {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .work-card-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    transition: gap 0.2s, color 0.2s;
-  }
-  .work-card-link:hover { gap: 0.75rem; }
-  .work-card-link--secondary { color: var(--ink-soft); }
-  .work-card-link--secondary:hover { color: var(--ink); }
+/* ── work ── */
+.work-card{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:38px;background:var(--bg-2)}
+.work-meta{font-family:var(--mono);font-size:12px;color:var(--text-3);margin-bottom:14px}
+.work-card h3{font-size:30px;margin-bottom:14px}
+.work-card p{color:var(--text-2)}
+.work-links{margin-top:24px;display:flex;gap:20px;font-size:14.5px}
+.work-links a{color:var(--amber)}
+.work-links a:hover{text-decoration:underline}
+@media(max-width:860px){.work-card{grid-template-columns:1fr}}
 
-  .mission {
-    text-align: center;
-    padding: 8rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .mission-text {
-    font-size: clamp(1.75rem, 4vw, 3rem);
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    font-weight: 500;
-    max-width: 26ch;
-    margin: 0 auto;
-  }
-  .mission-text .accent { color: var(--accent); }
+/* ── local pitch ── */
+.local h2{font-size:clamp(30px,4.4vw,44px);max-width:22ch}
+.local-lede{margin-top:20px;max-width:62ch;color:var(--text-2);font-size:17.5px}
+.local-grid{margin-top:52px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.local-item{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--bg-2)}
+.local-item .ic{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:14px}
+.local-item h4{font-size:17px;margin-bottom:8px}
+.local-item p{font-size:14.5px;color:var(--text-2)}
+@media(max-width:980px){.local-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.local-grid{grid-template-columns:1fr}}
+.fit{margin-top:34px;font-size:15px;color:var(--text-3)}
+.fit b{color:var(--text-2);font-weight:500}
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .service-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: border-color 0.2s;
-  }
-  .service-card:hover { border-color: var(--ink-faint); }
-  .service-icon {
-    width: 40px; height: 40px;
-    border-radius: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent);
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-  }
-  .service-card h4 { font-size: 1.15rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-  .service-card p { color: var(--ink-soft); font-size: 0.9rem; }
+/* ── plans ── */
+.pricing{background:var(--bg-2)}
+.pricing h2{font-size:clamp(30px,4.4vw,44px)}
+.pricing-sub{margin-top:16px;color:var(--text-2);max-width:62ch}
+/* single flexible plan — no tier menu */
+.plan{margin-top:48px;border:1px solid var(--line);border-radius:16px;padding:38px;background:var(--bg);max-width:760px}
+.plan-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line-soft);padding-bottom:22px}
+.plan-head h3{font-size:24px}
+/* price kept but understated — no oversized numerals */
+.plan-price{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--text-2);letter-spacing:-.01em}
+.plan-price b{color:var(--text);font-weight:600}
+.plan-price small{font-size:13px;color:var(--text-3);font-weight:400}
+.plan-lede{margin-top:22px;color:var(--text-2);font-size:15.5px;max-width:62ch}
+.plan-list{list-style:none;margin:24px 0 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:11px 26px;font-size:14.5px;color:var(--text-2)}
+.plan-list li{padding-left:22px;position:relative}
+.plan-list li::before{content:"—";position:absolute;left:0;color:var(--amber);font-family:var(--mono)}
+@media(max-width:600px){.plan-list{grid-template-columns:1fr}.plan{padding:30px 24px}}
 
-  .contact {
-    text-align: center;
-    padding: 8rem 0;
-  }
-  .contact h2 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    font-weight: 600;
-    max-width: 18ch;
-    margin: 0 auto 2rem;
-  }
-  .contact h2 .accent { color: var(--accent); }
-  .contact-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 2.5rem;
-  }
-  .email-pill {
-    display: inline-flex;
-    align-items: stretch;
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-    transition: border-color 0.2s;
-  }
-  .email-pill:hover { border-color: var(--ink-faint); }
-  .email-pill .email-address {
-    padding: 0.85rem 0.5rem 0.85rem 1.5rem;
-    color: var(--accent);
-    font-size: 1rem;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-  }
-  .email-pill .email-address:hover { color: var(--ink); }
-  .email-pill .copy-btn {
-    background: transparent;
-    border: none;
-    border-left: 1px solid var(--border);
-    color: var(--ink-soft);
-    cursor: pointer;
-    padding: 0 1.25rem;
-    font-family: inherit;
-    font-size: 0.85rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: color 0.2s, background 0.2s;
-  }
-  .email-pill .copy-btn:hover { color: var(--accent); background: rgba(124, 245, 196, 0.06); }
-  .email-pill .copy-btn:active { background: rgba(124, 245, 196, 0.12); }
-  .email-pill .copy-btn .copy-icon { width: 14px; height: 14px; }
-  .contact-meta {
-    color: var(--ink-faint);
-    font-size: 0.85rem;
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  }
+/* spec-sheet build table — the signature element */
+.builds{margin-top:84px}
+.builds h3{font-size:24px;margin-bottom:8px}
+.builds-sub{color:var(--text-2);font-size:15px;margin-bottom:34px;max-width:64ch}
+.custom-note{margin-top:24px;font-size:14.5px;color:var(--text-2);max-width:64ch}
+.custom-note a{color:var(--amber)}
+.custom-note a:hover{text-decoration:underline}
+.sheet{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-family:var(--mono)}
+.sheet-row{display:grid;grid-template-columns:1.4fr 2.2fr .9fr .8fr;gap:18px;padding:22px 26px;border-top:1px solid var(--line-soft);align-items:baseline;background:var(--bg)}
+.sheet-row:first-child{border-top:none;background:var(--bg-3);padding:14px 26px}
+.sheet-head{font-size:11px;letter-spacing:.1em;color:var(--text-3);text-transform:uppercase}
+.sheet-name{font-family:var(--display);font-weight:600;font-size:16.5px}
+.sheet-name small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--text-3);font-weight:400;margin-top:4px}
+.sheet-desc{font-family:var(--body);font-size:14px;color:var(--text-2)}
+.sheet-time{font-size:12.5px;color:var(--text-3)}
+/* price understated — muted, not amber-spotlighted */
+.sheet-price{font-size:14.5px;font-weight:500;text-align:right;color:var(--text-2)}
+.sheet-price small{display:block;font-size:11px;color:var(--text-3);font-weight:400}
+@media(max-width:820px){
+  .sheet-row{grid-template-columns:1fr;gap:8px;padding:20px 22px}
+  .sheet-row:first-child{display:none}
+  .sheet-price{text-align:left}
+}
+.addons{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.addon{border:1px dashed var(--line);border-radius:12px;padding:18px 20px}
+.addon b{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+.addon span{font-family:var(--mono);font-size:12.5px;color:var(--text-3)}
+.addon p{font-size:13px;color:var(--text-3);margin-top:6px}
+@media(max-width:920px){.addons{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.addons{grid-template-columns:1fr}}
+.fineprint{margin-top:34px;font-size:13.5px;color:var(--text-3);max-width:72ch}
+.fineprint b{color:var(--text-2);font-weight:500}
 
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translate(-50%, 1rem);
-    background: var(--ink);
-    color: var(--bg);
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 200;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+/* ── process ── */
+.steps{margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{border-top:2px solid var(--line);padding-top:20px}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--amber)}
+.step h4{font-size:17px;margin:10px 0 8px}
+.step p{font-size:14.5px;color:var(--text-2)}
+@media(max-width:920px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.steps{grid-template-columns:1fr}}
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    will-change: opacity, transform;
-  }
-  .reveal.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-stagger > .reveal { transition-delay: 0ms; }
-  .reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
-  .reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
-  .reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal.in-view {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+/* ── studio ── */
+.disc{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.disc-item{border:1px solid var(--line);border-radius:14px;padding:26px;background:var(--bg-2)}
+.disc-item .glyph{font-family:var(--mono);color:var(--text-3);font-size:15px;margin-bottom:16px}
+.disc-item h4{font-size:17px;margin-bottom:8px}
+.disc-item p{font-size:14.5px;color:var(--text-2)}
+@media(max-width:860px){.disc{grid-template-columns:1fr}}
 
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    display: flex; justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  }
+/* ── faq ── */
+.faq-list{margin-top:44px;max-width:760px}
+details{border-top:1px solid var(--line-soft);padding:22px 0}
+details:last-child{border-bottom:1px solid var(--line-soft)}
+summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--text-3);flex-shrink:0}
+details[open] summary::after{content:"–"}
+details p{margin-top:14px;color:var(--text-2);font-size:15px;max-width:64ch}
 
-  @media (max-width: 768px) {
-    .nav-toggle { display: block; }
-    .nav-links {
-      position: fixed;
-      inset: 0;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      background: rgba(10, 10, 12, 0.97);
-      backdrop-filter: blur(20px);
-      z-index: 90;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    body.nav-open .nav-links {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .nav-links li {
-      width: 100%;
-      text-align: center;
-    }
-    .nav-links a {
-      display: block;
-      font-size: 1.5rem;
-      padding: 1.25rem 2rem;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-    .nav-links .nav-cta {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 1rem;
-      padding: 0.75rem 1.75rem;
-      color: var(--bg);
-    }
-    body.nav-open { overflow: hidden; }
+/* ── contact ── */
+.contact{text-align:left}
+.contact h2{font-size:clamp(32px,5vw,52px);max-width:18ch}
+.contact-sub{margin-top:18px;color:var(--text-2);max-width:54ch}
+.mail-row{margin-top:36px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.mail{font-family:var(--mono);font-size:17px;color:var(--amber)}
+.copy-btn{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:8px 14px;background:none;color:var(--text-2);cursor:pointer}
+.copy-btn:hover{border-color:var(--amber);color:var(--amber)}
+.quick{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.quick a{font-size:13.5px;border:1px solid var(--line);border-radius:99px;padding:10px 18px;color:var(--text-2)}
+.quick a:hover{border-color:var(--amber);color:var(--text)}
+.contact-note{margin-top:34px;font-family:var(--mono);font-size:12.5px;color:var(--text-3)}
 
-    .work-card {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    .work-card-visual {
-      aspect-ratio: 720 / 1557;
-      max-width: 240px;
-      margin: 0 auto;
-    }
-    .services-grid { grid-template-columns: 1fr; }
-  }
+footer{border-top:1px solid var(--line-soft);padding:36px 0;font-family:var(--mono);font-size:12.5px;color:var(--text-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <div class="logo">
-    <span class="logo-dot"></span>
-    RyGar Labs
+<nav aria-label="Main">
+  <div class="nav-in">
+    <a class="logo" href="#top">RyGar<span> Labs</span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#growth">Services</a>
+      <a href="#pricing">Plans</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch</a>
   </div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#mission">Mission</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-  </ul>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<header class="hero container">
-  <a class="badge" href="https://apps.apple.com/us/app/asideo/id6773941568">
-    <span class="badge-dot"></span>
-    <span class="mono">Asideo is live on the App Store →</span>
-  </a>
-  <h1 class="display">
-    Software<br>
-    that earns its <span class="accent">space</span>.
-  </h1>
-  <p class="hero-lead">
-    Native iOS apps and marketing sites, designed and built end-to-end. One studio, no handoffs, no template starts.
-  </p>
-  <div class="hero-cta">
-    <a class="btn-primary" href="#work">See the work →</a>
-    <a class="btn-secondary" href="#contact">Start a project</a>
+<header class="hero wrap" id="top">
+  <a class="ship" href="https://apps.apple.com/us/app/asideo/id6773941568" target="_blank" rel="noopener"><i></i> Asideo is live on the App Store →</a>
+  <h1>Software that earns its space. <em>Growth that earns its keep.</em></h1>
+  <p>RyGar Labs is an independent studio in Bowling Green, Kentucky. I design and build high-craft websites end to end, and run monthly services that keep local businesses visible to the people looking for them. The same hands that shipped a native iOS app to the App Store go into every project — one person, no handoffs, no template starts.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-amber" href="#growth">Explore services</a>
+    <a class="btn btn-ghost" href="#work">See the work</a>
   </div>
 </header>
 
-<section id="work">
-  <div class="container">
-    <div class="section-eyebrow reveal">/ 01 — selected work</div>
-    <h2 class="section-title reveal">Shipped and live.</h2>
-    <p class="section-intro reveal">Asideo is the first public release from the studio. More projects land here as they ship — no placeholder filler.</p>
-    <div class="work-grid">
-      <article class="work-card reveal">
-        <a class="work-card-visual" href="/asideo/" aria-label="Read the Asideo case study">
-          <img src="assets/asideo-hero.jpg" alt="Asideo app on iPhone — hands-free voice notes with AI-formatted summaries" loading="lazy">
-        </a>
-        <div class="work-card-info">
-          <div class="work-card-meta"><span>iOS</span><span>·</span><span>2026</span><span>·</span><span>Live on App Store</span></div>
-          <h3><a href="/asideo/">Asideo</a></h3>
-          <p>Hands-free voice notes for iOS. Back-tap to record, on-device transcription, and AI-formatted summaries powered by Apple Intelligence — built and shipped end to end.</p>
-          <div class="work-card-actions">
-            <a class="work-card-link" href="/asideo/">Read the case study →</a>
-            <a class="work-card-link work-card-link--secondary" href="https://apps.apple.com/us/app/asideo/id6773941568">App Store ↗</a>
-          </div>
+<section id="work" class="wrap">
+  <p class="eyebrow">/ <b>01</b> — selected work</p>
+  <div class="work-card rv">
+    <a href="https://rygarlabs.com/asideo/" aria-label="Asideo case study">
+      <img src="assets/asideo-hero.jpg" alt="Asideo app on iPhone — hands-free voice notes with AI-formatted summaries" loading="lazy"/>
+    </a>
+    <div>
+      <p class="work-meta">iOS · 2026 · Live on App Store</p>
+      <h3>Asideo</h3>
+      <p>Hands-free voice notes for iOS. Back-tap to record, on-device transcription, and AI-formatted summaries powered by Apple Intelligence — designed, built, and shipped end to end. The same standard goes into every client project.</p>
+      <div class="work-links">
+        <a href="https://rygarlabs.com/asideo/">Read the case study →</a>
+        <a href="https://apps.apple.com/us/app/asideo/id6773941568" target="_blank" rel="noopener">App Store ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="growth" class="wrap local">
+  <p class="eyebrow">/ <b>02</b> — services</p>
+  <h2 class="rv">The digital side, handled.</h2>
+  <p class="local-lede rv">Most great Bowling Green businesses run on word of mouth and Google reviews. RyGar Labs takes care of the digital side — email, social, your Google profile, your website — so you can stay focused on the work you're known for. Plain English, and one local person you can actually reach.</p>
+  <div class="local-grid">
+    <div class="local-item rv">
+      <p class="ic">[ @ ]</p>
+      <h4>Email newsletters</h4>
+      <p>A regular email to your customer list that brings people back — specials, news, seasonal updates. Written, designed, and sent for you.</p>
+    </div>
+    <div class="local-item rv">
+      <p class="ic">[ # ]</p>
+      <h4>Social media content</h4>
+      <p>Consistent, on-brand posts for Facebook and Instagram so your pages stay active — without adding to your plate.</p>
+    </div>
+    <div class="local-item rv">
+      <p class="ic">[ ★ ]</p>
+      <h4>Google Business management</h4>
+      <p>Your Google profile kept current — photos, posts, hours, and considered responses to every review, good or bad.</p>
+    </div>
+    <div class="local-item rv">
+      <p class="ic">[ &lt;/&gt; ]</p>
+      <h4>Websites</h4>
+      <p>A fast, mobile-first website built by hand for your business — with room to grow into something more custom when you're ready.</p>
+    </div>
+  </div>
+  <p class="fit rv"><b>A good fit for:</b> restaurants &amp; cafés · contractors &amp; home services · boutiques &amp; retail · makers &amp; local brands · anyone whose work is better than their web presence.</p>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="wrap">
+    <p class="eyebrow">/ <b>03</b> — plans &amp; builds</p>
+    <h2 class="rv">Two ways to work together.</h2>
+    <p class="pricing-sub rv">An ongoing growth plan, or a one-time build you own outright. Both are built around your business — and everything I make for you, from your site to your content to your accounts, is yours to keep.</p>
+
+    <!-- ====== EDIT PRICES: growth plan ====== -->
+    <div class="plan rv">
+      <div class="plan-head">
+        <h3>Growth plan</h3>
+        <p class="plan-price">from <b>$150</b><small>/mo</small></p>
+      </div>
+      <p class="plan-lede">Built around what your business actually needs — any mix of email newsletters, social content, and Google Business management. Start with one service and add more whenever it makes sense. No bundles to decode, just the work that moves the needle for you.</p>
+      <ul class="plan-list">
+        <li>Email newsletters to your customer list</li>
+        <li>Social content for Facebook &amp; Instagram</li>
+        <li>Google Business profile kept current</li>
+        <li>Considered responses to every review</li>
+        <li>Optional ongoing website care &amp; updates</li>
+        <li>Monthly recap in plain English</li>
+        <li>Direct line to me — no ticket systems</li>
+        <li>Month-to-month, cancel anytime</li>
+      </ul>
+      <a class="btn btn-amber" href="mailto:contact@rygarlabs.com?subject=Growth%20plan%20%E2%80%94%20let%27s%20talk">Ask about a growth plan</a>
+    </div>
+
+    <!-- ====== EDIT PRICES: one-time builds ====== -->
+    <div class="builds">
+      <h3 class="rv">One-time builds</h3>
+      <p class="builds-sub rv">Prefer to own it outright? Every build is custom code — no Wix, no templates — with mobile-first design, fast load times, and basic SEO included.</p>
+      <div class="sheet rv">
+        <div class="sheet-row">
+          <span class="sheet-head">Build</span>
+          <span class="sheet-head">What you get</span>
+          <span class="sheet-head">Timeline</span>
+          <span class="sheet-head" style="text-align:right">Price</span>
         </div>
-      </article>
+        <div class="sheet-row">
+          <span class="sheet-name">Launch Site<small>BUILD / 01</small></span>
+          <span class="sheet-desc">A sharp single-page site: your story, services, photos, reviews, hours, and a contact path that works. A strong first web presence.</span>
+          <span class="sheet-time">~1 week</span>
+          <span class="sheet-price">$350<small>one-time</small></span>
+        </div>
+        <div class="sheet-row">
+          <span class="sheet-name">Business Site<small>BUILD / 02</small></span>
+          <span class="sheet-desc">Up to five pages — home, services, about, gallery, contact — with lead-capture forms and Google Maps. Room to grow.</span>
+          <span class="sheet-time">2–3 weeks</span>
+          <span class="sheet-price">$800<small>one-time</small></span>
+        </div>
+      </div>
+      <p class="custom-note rv">Need online ordering, booking, or something more custom? <a href="mailto:contact@rygarlabs.com?subject=Custom%20website%20%E2%80%94%20let%27s%20talk">Let's talk</a> — I'll scope it with you honestly, no pressure.</p>
+
+      <!-- ====== EDIT PRICES: add-ons ====== -->
+      <div class="addons">
+        <div class="addon rv"><b>Hosting &amp; care</b><span>$35/mo</span><p>Hosting, backups, security updates, and small content edits.</p></div>
+        <div class="addon rv"><b>Extra page</b><span>$100</span><p>Add a page to any build, designed to match.</p></div>
+        <div class="addon rv"><b>Logo &amp; brand refresh</b><span>$200</span><p>A clean logo and color set if yours needs a reset.</p></div>
+        <div class="addon rv"><b>Copywriting</b><span>included</span><p>Every build and plan includes the words, not just the design.</p></div>
+      </div>
+
+      <p class="fineprint rv"><b>How it works:</b> one-time builds are split 50% to start, 50% at launch. Monthly plans bill at the start of each month and can be paused or stopped anytime with a week's notice. <b>You own your site, your content, your accounts, and your customer list</b> — always. If we ever part ways, everything goes with you.</p>
     </div>
   </div>
 </section>
 
-<section class="mission" id="mission">
-  <div class="container">
-    <div class="section-eyebrow reveal">/ 02 — mission</div>
-    <p class="mission-text reveal">
-      Build things people actually want to use. Then build them <span class="accent">better than they expected</span>.
-    </p>
+<section class="wrap">
+  <p class="eyebrow">/ <b>04</b> — how it works</p>
+  <div class="steps">
+    <div class="step rv"><p class="n">STEP 1</p><h4>Quick chat</h4><p>Email me or grab a call. Fifteen minutes to understand your business and what "working" looks like for you.</p></div>
+    <div class="step rv"><p class="n">STEP 2</p><h4>Plain-English plan</h4><p>You get a one-page proposal: exactly what I'll do and when it lands. No jargon, no padding.</p></div>
+    <div class="step rv"><p class="n">STEP 3</p><h4>I build, you approve</h4><p>You see real progress, not status meetings. Nothing goes live without your sign-off.</p></div>
+    <div class="step rv"><p class="n">STEP 4</p><h4>Launch &amp; grow</h4><p>Your site ships, your plan runs, and you get a monthly recap of what it did — in plain terms, not buzzwords.</p></div>
   </div>
 </section>
 
-<section id="services">
-  <div class="container">
-    <div class="section-eyebrow reveal">/ 03 — what i do</div>
-    <h2 class="section-title reveal">Three disciplines, one standard.</h2>
-    <div class="services-grid reveal-stagger">
-      <div class="service-card reveal">
-        <div class="service-icon">{ }</div>
-        <h4>Native iOS</h4>
-        <p>SwiftUI apps, App Intents, Apple Intelligence integration, and App Store submission, end to end.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">&lt;/&gt;</div>
-        <h4>Web Design & Build</h4>
-        <p>Premium marketing sites and product landing pages, designed and shipped — no template-store finishes.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">◊</div>
-        <h4>Product Direction</h4>
-        <p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p>
-      </div>
-    </div>
+<section class="wrap">
+  <p class="eyebrow">/ <b>05</b> — the studio</p>
+  <div class="disc">
+    <div class="disc-item rv"><p class="glyph">{ }</p><h4>Native iOS, shipped</h4><p>Asideo — SwiftUI, App Intents, and Apple Intelligence, submitted to the App Store end to end. The craft standard behind every project here.</p></div>
+    <div class="disc-item rv"><p class="glyph">&lt;/&gt;</p><h4>Web design &amp; build</h4><p>Marketing sites and product landing pages, designed and shipped — no template-store finishes.</p></div>
+    <div class="disc-item rv"><p class="glyph">◊</p><h4>Product direction</h4><p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p></div>
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="section-eyebrow reveal">/ 04 — start something</div>
-    <h2 class="reveal">Have an idea worth <span class="accent">making real</span>?</h2>
-    <div class="contact-actions reveal">
-      <div class="email-pill">
-        <a class="email-address" href="mailto:ap3garcia@gmail.com">ap3garcia@gmail.com</a>
-        <button class="copy-btn" id="copy-email" type="button" aria-label="Copy email address to clipboard" data-email="ap3garcia@gmail.com">
-          <svg class="copy-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="5" y="5" width="9" height="9" rx="1.5"/>
-            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/>
-          </svg>
-          <span class="copy-btn-label">Copy</span>
-        </button>
-      </div>
-      <p class="contact-meta">Typically replies within 24 hours · Based in the U.S.</p>
-    </div>
+<section id="faq" class="wrap">
+  <p class="eyebrow">/ <b>06</b> — questions, answered</p>
+  <div class="faq-list">
+    <details class="rv">
+      <summary>Do I have to sign a contract?</summary>
+      <p>No. Monthly plans are month-to-month — if it isn't working for you, stop with a week's notice. One-time builds use a simple one-page agreement so we both know exactly what's being made.</p>
+    </details>
+    <details class="rv">
+      <summary>Who owns the website when it's done?</summary>
+      <p>You do. The domain, the code, the content, the accounts, and your customer list are yours from day one. I never hold a site hostage.</p>
+    </details>
+    <details class="rv">
+      <summary>I already have a website. Can you still help?</summary>
+      <p>Yes — the growth plan works with whatever you already have. And if your site needs a refresh, I'll give you an honest read on whether it's worth updating or rebuilding.</p>
+    </details>
+    <details class="rv">
+      <summary>How soon will a growth plan make a difference?</summary>
+      <p>The honest answer: email and Google Business work tends to show in the first month or two; social and SEO compound over three to six. Every month you get a recap so you can judge for yourself.</p>
+    </details>
+    <details class="rv">
+      <summary>Do you only work with Bowling Green businesses?</summary>
+      <p>Bowling Green and the surrounding area is home base, and local clients get in-person time. But websites and apps travel fine — I take remote projects too.</p>
+    </details>
+    <details class="rv">
+      <summary>Why work with a one-person studio instead of an agency?</summary>
+      <p>You talk to the person doing the work — the same one who designed, built, and shipped a live App Store app. No account managers, no handoffs, and no agency overhead in the middle.</p>
+    </details>
   </div>
 </section>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<section id="contact" class="wrap contact">
+  <p class="eyebrow">/ <b>07</b> — start something</p>
+  <h2 class="rv">Let's talk about your business.</h2>
+  <p class="contact-sub rv">Tell me what you do and what's not working. You'll get a straight answer about whether I can help and how I'd approach it.</p>
+  <div class="mail-row rv">
+    <a class="mail" href="mailto:contact@rygarlabs.com">contact@rygarlabs.com</a>
+    <button class="copy-btn" id="copyEmail" type="button">Copy</button>
+  </div>
+  <div class="quick rv">
+    <a href="mailto:contact@rygarlabs.com?subject=Growth%20plan%20inquiry%20%E2%80%94%20%5Byour%20business%20name%5D">Ask about a growth plan</a>
+    <a href="mailto:contact@rygarlabs.com?subject=Website%20build%20inquiry%20%E2%80%94%20%5Byour%20business%20name%5D">Ask about a website</a>
+    <a href="mailto:contact@rygarlabs.com?subject=App%20idea%20%E2%80%94%20%5Byour%20idea%5D">Pitch an app idea</a>
+  </div>
+  <p class="contact-note">Typically replies within 24 hours · Bowling Green, KY</p>
+</section>
 
-<footer>
-  <span>© 2026 RyGar Labs</span>
-  <span>// built by hand</span>
+<footer class="wrap">
+  <span>© 2026 RyGar Labs // built by hand</span>
+  <span>Bowling Green, Kentucky</span>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+// copy email
+document.getElementById('copyEmail').addEventListener('click', function(){
+  navigator.clipboard.writeText('contact@rygarlabs.com').then(()=>{
+    this.textContent='Copied';
+    setTimeout(()=>{this.textContent='Copy'},1600);
   });
-
-  const navToggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
-  const setNavOpen = (open) => {
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  };
-  navToggle.addEventListener('click', () => {
-    setNavOpen(!document.body.classList.contains('nav-open'));
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => setNavOpen(false));
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-      setNavOpen(false);
-    }
-  });
-
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  const showToast = (message) => {
-    toast.textContent = message;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-  };
-
-  const copyBtn = document.getElementById('copy-email');
-  const copyLabel = copyBtn.querySelector('.copy-btn-label');
-  copyBtn.addEventListener('click', async () => {
-    const email = copyBtn.dataset.email;
-    try {
-      await navigator.clipboard.writeText(email);
-      copyLabel.textContent = 'Copied';
-      showToast('Email copied to clipboard');
-      setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2200);
-    } catch (err) {
-      showToast('Copy failed — long-press the email instead');
-    }
-  });
-
-  const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    reveals.forEach((el) => revealObserver.observe(el));
-  } else {
-    reveals.forEach((el) => el.classList.add('in-view'));
-  }
+});
+// scroll reveal (respects reduced motion via CSS)
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
