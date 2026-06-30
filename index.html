@@ -381,15 +381,6 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
 .jv-arm.right .arm-wrist{animation-delay:-1s}
 .jv-arm.right .arm-tool{animation-delay:-3s}
 .jv-arm.right .finger.l,.jv-arm.right .finger.r{animation-delay:-1.4s}
-
-/* viewport-anchored bracket frame — evenly inset on all four sides */
-.jv-frame{position:fixed;inset:0;z-index:6;pointer-events:none}
-.jv-corner{position:fixed;width:42px;height:42px;border:2px solid var(--jv-cyan);opacity:0;animation:jvCornerIn .6s ease .15s forwards;filter:drop-shadow(0 0 6px rgba(60,200,255,.55))}
-.jv-corner.tl{top:68px;left:18px;border-right:none;border-bottom:none}
-.jv-corner.tr{top:68px;right:18px;border-left:none;border-bottom:none}
-.jv-corner.bl{bottom:18px;left:18px;border-right:none;border-top:none}
-.jv-corner.br{bottom:18px;right:18px;border-left:none;border-top:none}
-@keyframes jvCornerIn{from{opacity:0}to{opacity:.75}}
 .jv-statusbar{position:absolute;top:84px;left:50%;transform:translateX(-50%);z-index:7;display:flex;gap:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--jv-cyan);opacity:0;animation:jvFade2 .8s ease 1.1s forwards,jvFlicker 8s steps(1) 2s infinite;text-transform:uppercase;white-space:nowrap;text-shadow:0 0 8px rgba(60,200,255,.5)}
 @keyframes jvFade2{to{opacity:.9}}
 .jv-statusbar b{color:var(--jv-cyan-bright);font-weight:600}
@@ -406,10 +397,16 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
 @keyframes jvLine{from{opacity:0;transform:translateX(-8px)}to{opacity:.85;transform:none}}
 
 @media(max-width:760px){
-  .jv-arm,.jv-statusbar,.jv-data,.jv-readout,.jv-frame{display:none}
+  .jv-statusbar,.jv-data,.jv-readout{display:none}
   .jv-reactor{width:min(64vw,280px);height:min(64vw,280px)}
   .hero{min-height:86vh}
+  /* portrait robots — scaled down and pushed to the edges so they frame
+     the reactor without crowding the copy (scrim still covers the text) */
+  .jv-arm.left,.jv-arm.right{animation:jvArmFade 1s ease .6s forwards}
+  .jv-arm.left{left:-42px;transform-origin:bottom left;transform:scale(.52) rotate(7deg)}
+  .jv-arm.right{right:-42px;transform-origin:bottom right;transform:scaleX(-1) scale(.52) rotate(7deg)}
 }
+@keyframes jvArmFade{from{opacity:0}to{opacity:.9}}
 @media (prefers-reduced-motion:reduce){
   .jv-scan,.spin-cw,.spin-ccw,.spin-fast,.radar-sweep,.rc-ticks,.rc-gA,.rc-gB,.rc-gC,.rc-irisA,.rc-irisB,.rc-core,.rc-spark,.rc-ray,
   .arm-col,.arm-lower,.arm-upper,.arm-wrist,.arm-tool,.finger,.jv-flash,.jv-grid,.jv-statusbar{animation-duration:.01ms!important;animation-iteration-count:1!important}
@@ -544,10 +541,6 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
           </div>
         </div>
       </div>
-    </div>
-    <div class="jv-frame">
-      <span class="jv-corner tl"></span><span class="jv-corner tr"></span>
-      <span class="jv-corner bl"></span><span class="jv-corner br"></span>
     </div>
     <div class="jv-statusbar">
       <span><span class="dot"></span>RG&middot;OS ONLINE</span>
