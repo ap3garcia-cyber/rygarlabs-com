@@ -489,79 +489,322 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 }
 </style>
 <style>
+/* ── AUTH GATE ── */
 #pw-gate {
-  position: fixed; inset: 0; z-index: 9999;
-  background: #0d0f18;
-  display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.35s;
+  position:fixed; inset:0; z-index:9999;
+  background:#0d0f18;
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity 0.35s;
 }
 #pw-card {
-  background: #161928; border: 1px solid #2a2f4a; border-radius: 16px;
-  padding: 40px 36px; width: 320px; max-width: 90vw; text-align: center;
+  background:#161928; border:1px solid #2a2f4a; border-radius:18px;
+  padding:40px 32px 36px; width:320px; max-width:90vw; text-align:center;
 }
 #pw-logo {
-  font-size: 18px; font-weight: 800;
-  background: linear-gradient(135deg, #fff, #4ecdc4);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: 6px;
+  font-size:18px; font-weight:800;
+  background:linear-gradient(135deg,#fff,#4ecdc4);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; margin-bottom:5px;
 }
-#pw-sub { font-size: 13px; color: #6b7299; margin-bottom: 28px; }
+#pw-sub { font-size:12px; color:#6b7299; margin-bottom:30px; letter-spacing:.4px; }
+
+/* Face ID button */
+#faceid-btn {
+  width:100%; padding:14px 12px; border-radius:10px;
+  background:linear-gradient(135deg,#6c63ff,#4ecdc4);
+  border:none; color:#fff; font-size:15px; font-weight:700;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  gap:10px; margin-bottom:12px; transition:opacity .2s;
+}
+#faceid-btn:hover { opacity:.88; }
+#faceid-btn svg { flex-shrink:0; }
+
+/* divider */
+#pw-or {
+  display:flex; align-items:center; gap:10px;
+  font-size:11px; color:#3a3f5c; margin-bottom:12px;
+}
+#pw-or::before, #pw-or::after {
+  content:''; flex:1; height:1px; background:#2a2f4a;
+}
+
+/* password input */
 #pw-input {
-  width: 100%; padding: 12px 14px; border-radius: 8px;
-  background: #1e2236; border: 1px solid #2a2f4a;
-  color: #e8eaf6; font-size: 16px; outline: none;
-  box-sizing: border-box; margin-bottom: 12px; text-align: center;
-  letter-spacing: 2px;
+  width:100%; padding:12px 14px; border-radius:8px;
+  background:#1e2236; border:1px solid #2a2f4a;
+  color:#e8eaf6; font-size:16px; outline:none;
+  box-sizing:border-box; margin-bottom:10px;
+  text-align:center; letter-spacing:2px;
 }
-#pw-input:focus { border-color: #6c63ff; }
+#pw-input:focus { border-color:#6c63ff; }
 #pw-btn {
-  width: 100%; padding: 12px; border-radius: 8px;
-  background: linear-gradient(135deg, #6c63ff, #4ecdc4);
-  border: none; color: #fff; font-size: 15px; font-weight: 700;
-  cursor: pointer; transition: opacity 0.2s;
+  width:100%; padding:12px; border-radius:8px;
+  background:#252a42; border:1px solid #2a2f4a;
+  color:#e8eaf6; font-size:14px; font-weight:600;
+  cursor:pointer; transition:border-color .2s;
 }
-#pw-btn:hover { opacity: 0.88; }
-#pw-error { font-size: 12px; color: #ff6b6b; margin-top: 10px; min-height: 18px; }
+#pw-btn:hover { border-color:#6c63ff; }
+
+/* setup Face ID prompt */
+#setup-prompt {
+  margin-top:20px; padding:16px; border-radius:10px;
+  background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.25);
+  display:none;
+}
+#setup-prompt p { font-size:13px; color:#e8eaf6; margin-bottom:12px; line-height:1.5; }
+#setup-yes {
+  width:100%; padding:11px; border-radius:8px;
+  background:linear-gradient(135deg,#6c63ff,#4ecdc4);
+  border:none; color:#fff; font-size:14px; font-weight:700;
+  cursor:pointer; margin-bottom:8px; transition:opacity .2s;
+}
+#setup-yes:hover { opacity:.88; }
+#setup-skip {
+  background:none; border:none; color:#6b7299;
+  font-size:12px; cursor:pointer; padding:4px;
+}
+#setup-skip:hover { color:#e8eaf6; }
+
+/* no-faceid fallback: password only */
+#pw-section-label {
+  font-size:11px; color:#6b7299; margin-bottom:12px; letter-spacing:.4px;
+}
+
+#pw-error { font-size:12px; color:#ff6b6b; margin-top:10px; min-height:18px; }
+#pw-success { font-size:12px; color:#51cf66; margin-top:10px; min-height:18px; }
+
 @keyframes pw-shake {
-  0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 60%{transform:translateX(8px)}
+  0%,100%{transform:translateX(0)} 25%{transform:translateX(-9px)} 75%{transform:translateX(9px)}
 }
-.pw-shaking { animation: pw-shake 0.35s ease; }
+.pw-shaking { animation:pw-shake 0.35s ease; }
+
+/* lockout banner */
+#lockout-msg { font-size:13px; color:#ff6b6b; margin-top:6px; display:none; }
 </style>
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
+<!-- ── AUTH GATE ── -->
 <div id="pw-gate">
   <div id="pw-card">
     <div id="pw-logo">RyGar Financial</div>
-    <div id="pw-sub">Family Dashboard · Private</div>
-    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password"
+    <div id="pw-sub">Family Dashboard &middot; Private</div>
+
+    <!-- Face ID button (shown when credential registered) -->
+    <button id="faceid-btn" onclick="doFaceID()" style="display:none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9V5a2 2 0 0 1 2-2h4"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/>
+        <path d="M21 15v4a2 2 0 0 1-2 2h-4"/><path d="M9 21H5a2 2 0 0 1-2-2v-4"/>
+        <line x1="9" y1="9" x2="9" y2="9.01"/><line x1="15" y1="9" x2="15" y2="9.01"/>
+        <path d="M9 16s1 1 3 1 3-1 3-1"/>
+        <path d="M12 12v3"/>
+      </svg>
+      Unlock with Face ID
+    </button>
+
+    <div id="pw-or" style="display:none">or</div>
+
+    <!-- Password section -->
+    <div id="pw-section-label" style="display:none">Enter Password</div>
+    <input id="pw-input" type="password" placeholder="Password"
+      autocomplete="current-password"
       onkeydown="if(event.key==='Enter')checkPw()"/>
     <button id="pw-btn" onclick="checkPw()">Unlock →</button>
+    <div id="lockout-msg"></div>
     <div id="pw-error"></div>
+    <div id="pw-success"></div>
+
+    <!-- Offer to set up Face ID after successful password auth -->
+    <div id="setup-prompt">
+      <p>🔐 Set up <strong>Face ID</strong> on this device so you never need to type the password again.</p>
+      <button id="setup-yes" onclick="setupFaceID()">Set Up Face ID</button>
+      <button id="setup-skip" onclick="skipSetup()">Maybe later</button>
+    </div>
   </div>
 </div>
+
 <script>
-(function(){
-  if(localStorage.getItem('fp_auth')==='1'){
-    document.getElementById('pw-gate').style.display='none';
+(function() {
+  'use strict';
+
+  var RPID       = 'rygarlabs.com';
+  var RP_NAME    = 'RyGar Financial';
+  var PASSWORD   = 'Wilderness26';
+  var AUTH_TTL   = 8 * 60 * 60 * 1000;   // stay unlocked 8 hours
+  var MAX_TRIES  = 5;
+  var LOCKOUT_MS = 10 * 60 * 1000;        // 10-min lockout after 5 bad attempts
+
+  /* ── helpers ── */
+  function b64u(buf) {
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(buf)))
+      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   }
+  function b64d(s) {
+    s = s.replace(/-/g,'+').replace(/_/g,'/');
+    while (s.length % 4) s += '=';
+    return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); });
+  }
+  function el(id) { return document.getElementById(id); }
+  function setErr(msg) { el('pw-error').textContent = msg; el('pw-success').textContent = ''; }
+  function setOk(msg)  { el('pw-success').textContent = msg; el('pw-error').textContent = ''; }
+  function shake()     { el('pw-card').classList.add('pw-shaking'); setTimeout(function(){ el('pw-card').classList.remove('pw-shaking'); }, 380); }
+
+  function unlock() {
+    localStorage.setItem('fp_auth_exp', Date.now() + AUTH_TTL);
+    var g = el('pw-gate');
+    g.style.opacity = '0';
+    setTimeout(function(){ g.style.display = 'none'; }, 350);
+  }
+
+  /* ── lockout ── */
+  function isLockedOut() {
+    var until = parseInt(localStorage.getItem('fp_lockout') || '0');
+    return Date.now() < until;
+  }
+  function recordBadAttempt() {
+    var tries = parseInt(localStorage.getItem('fp_tries') || '0') + 1;
+    localStorage.setItem('fp_tries', tries);
+    if (tries >= MAX_TRIES) {
+      var until = Date.now() + LOCKOUT_MS;
+      localStorage.setItem('fp_lockout', until);
+      localStorage.setItem('fp_tries', '0');
+      return true;
+    }
+    return false;
+  }
+  function clearAttempts() { localStorage.removeItem('fp_tries'); localStorage.removeItem('fp_lockout'); }
+
+  function showLockout() {
+    var until = parseInt(localStorage.getItem('fp_lockout') || '0');
+    var mins  = Math.ceil((until - Date.now()) / 60000);
+    el('lockout-msg').style.display = 'block';
+    el('lockout-msg').textContent   = 'Too many attempts — try again in ' + mins + ' minute' + (mins !== 1 ? 's' : '') + '.';
+    el('pw-input').disabled   = true;
+    el('pw-btn').disabled     = true;
+    setTimeout(function() {
+      el('lockout-msg').style.display = 'none';
+      el('pw-input').disabled   = false;
+      el('pw-btn').disabled     = false;
+    }, until - Date.now());
+  }
+
+  /* ── password check ── */
+  window.checkPw = function() {
+    if (isLockedOut()) { showLockout(); return; }
+    var val = el('pw-input').value;
+    if (val === PASSWORD) {
+      clearAttempts();
+      var hasCred = !!localStorage.getItem('fp_wacred');
+      var waAvail = window.PublicKeyCredential !== undefined;
+      if (!hasCred && waAvail) {
+        // offer Face ID setup
+        el('pw-input').style.display   = 'none';
+        el('pw-btn').style.display     = 'none';
+        el('pw-section-label').style.display = 'none';
+        el('setup-prompt').style.display    = 'block';
+        el('pw-or').style.display           = 'none';
+      } else {
+        unlock();
+      }
+    } else {
+      var locked = recordBadAttempt();
+      shake();
+      el('pw-input').value = '';
+      if (locked) {
+        showLockout();
+        setErr('');
+      } else {
+        var left = MAX_TRIES - parseInt(localStorage.getItem('fp_tries') || '0');
+        setErr('Incorrect password' + (left <= 2 ? ' — ' + left + ' attempt' + (left !== 1 ? 's' : '') + ' left' : ''));
+      }
+    }
+  };
+
+  /* ── Face ID setup (after password success) ── */
+  window.setupFaceID = async function() {
+    el('setup-yes').textContent = 'Setting up…';
+    el('setup-yes').disabled    = true;
+    try {
+      var challenge = crypto.getRandomValues(new Uint8Array(32));
+      var userId    = crypto.getRandomValues(new Uint8Array(16));
+      var cred = await navigator.credentials.create({ publicKey: {
+        challenge: challenge,
+        rp: { name: RP_NAME, id: RPID },
+        user: { id: userId, name: 'family', displayName: 'RyGar Family' },
+        pubKeyCredParams: [
+          { type:'public-key', alg:-7  },
+          { type:'public-key', alg:-257 }
+        ],
+        authenticatorSelection: {
+          authenticatorAttachment: 'platform',
+          userVerification: 'required',
+          residentKey: 'preferred'
+        },
+        timeout: 60000
+      }});
+      localStorage.setItem('fp_wacred', JSON.stringify({ id: cred.id, rawId: b64u(cred.rawId) }));
+      setOk('Face ID set up! Unlocking…');
+      setTimeout(unlock, 800);
+    } catch(e) {
+      el('setup-yes').textContent = 'Set Up Face ID';
+      el('setup-yes').disabled    = false;
+      setErr('Setup cancelled — unlocking with password…');
+      setTimeout(unlock, 1200);
+    }
+  };
+
+  window.skipSetup = function() { unlock(); };
+
+  /* ── Face ID authentication ── */
+  window.doFaceID = async function() {
+    var stored = JSON.parse(localStorage.getItem('fp_wacred') || 'null');
+    if (!stored) return;
+    setErr('');
+    el('faceid-btn').textContent = 'Waiting for Face ID…';
+    el('faceid-btn').disabled    = true;
+    try {
+      var challenge = crypto.getRandomValues(new Uint8Array(32));
+      var assertion = await navigator.credentials.get({ publicKey: {
+        challenge: challenge,
+        allowCredentials: [{ id: b64d(stored.rawId), type:'public-key', transports:['internal'] }],
+        userVerification: 'required',
+        rpId: RPID,
+        timeout: 60000
+      }});
+      if (assertion.id === stored.id) {
+        clearAttempts();
+        unlock();
+      } else {
+        throw new Error('Credential mismatch');
+      }
+    } catch(e) {
+      el('faceid-btn').innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V5a2 2 0 0 1 2-2h4"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M21 15v4a2 2 0 0 1-2 2h-4"/><path d="M9 21H5a2 2 0 0 1-2-2v-4"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="15" y1="9" x2="15" y2="9.01"/><path d="M9 16s1 1 3 1 3-1 3-1"/><path d="M12 12v3"/></svg> Unlock with Face ID';
+      el('faceid-btn').disabled = false;
+      if (e.name !== 'NotAllowedError') setErr('Face ID failed — use password below.');
+    }
+  };
+
+  /* ── init: decide which screen to show ── */
+  (function init() {
+    // still within session?
+    var exp = parseInt(localStorage.getItem('fp_auth_exp') || '0');
+    if (Date.now() < exp) { el('pw-gate').style.display = 'none'; return; }
+
+    var hasCred = !!localStorage.getItem('fp_wacred');
+    var waAvail = window.PublicKeyCredential !== undefined;
+
+    if (hasCred && waAvail) {
+      el('faceid-btn').style.display      = 'flex';
+      el('pw-or').style.display           = 'flex';
+      el('pw-section-label').style.display= 'block';
+      // auto-trigger Face ID after a short delay
+      setTimeout(function(){ doFaceID(); }, 400);
+    }
+
+    if (isLockedOut()) showLockout();
+  })();
+
 })();
-function checkPw(){
-  if(document.getElementById('pw-input').value==='Wilderness26'){
-    localStorage.setItem('fp_auth','1');
-    var g=document.getElementById('pw-gate');
-    g.style.opacity='0';
-    setTimeout(function(){g.style.display='none';},350);
-  } else {
-    var c=document.getElementById('pw-card');
-    c.classList.add('pw-shaking');
-    setTimeout(function(){c.classList.remove('pw-shaking');},400);
-    document.getElementById('pw-error').textContent='Incorrect password — try again';
-    document.getElementById('pw-input').value='';
-    document.getElementById('pw-input').focus();
-  }
-}
 </script>
 
 <div class="topbar">
