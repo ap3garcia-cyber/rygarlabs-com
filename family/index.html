@@ -1191,10 +1191,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <!-- ═══ STATEMENTS ═══ -->
 <div id="tab-statements" class="tab-content">
   <div class="section-title">Bank Statement Analyzer</div>
-  <div class="section-sub">Upload CSV exports from your bank — everything stays on your device, nothing is sent anywhere.</div>
+  <div class="section-sub">Upload a CSV or PDF statement from your bank — everything stays on your device, nothing is sent anywhere.</div>
 
   <div class="tip-box">
-    <strong>How to export a CSV from your bank:</strong> Log in → Transactions or Account Activity → Download / Export → choose CSV → select the month. Most banks (Chase, Wells Fargo, Truist, Fifth Third, PNC) all support this. Upload up to two files (one per account or per person).
+    <strong>No CSV option? Upload your PDF statement instead.</strong> Log in → Statements (or Transactions / Account Activity) → download the monthly statement as a PDF, then drop it below. If your bank <em>does</em> offer CSV (Chase, Wells Fargo, Truist, Fifth Third, PNC all do under Download / Export → CSV), that parses most accurately — but PDF works when CSV isn't available. Upload up to two files (one per account or per person). PDF parsing is best-effort, so give the parsed transactions a quick look and fix any category with the dropdowns.
   </div>
 
   <div class="grid-2" style="margin-bottom:20px">
@@ -1204,10 +1204,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         ondragover="event.preventDefault();this.classList.add('drag')"
         ondragleave="this.classList.remove('drag')"
         ondrop="handleDrop(event,1)">
-        <input type="file" id="file-1" accept=".csv,.txt" style="display:none" onchange="handleFile(event,1)"/>
+        <input type="file" id="file-1" accept=".csv,.txt,.pdf" style="display:none" onchange="handleFile(event,1)"/>
         <div class="upload-emoji">📄</div>
-        <div class="upload-title">Click or drag a CSV file here</div>
-        <div class="upload-sub">Supports Chase, Wells Fargo, Truist, PNC, Fifth Third, and most others</div>
+        <div class="upload-title">Click or drag a CSV or PDF file here</div>
+        <div class="upload-sub">CSV or PDF — Chase, Wells Fargo, Truist, PNC, Fifth Third, and most others</div>
         <div class="upload-fname" id="fname-1"></div>
       </div>
     </div>
@@ -1217,9 +1217,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         ondragover="event.preventDefault();this.classList.add('drag')"
         ondragleave="this.classList.remove('drag')"
         ondrop="handleDrop(event,2)">
-        <input type="file" id="file-2" accept=".csv,.txt" style="display:none" onchange="handleFile(event,2)"/>
+        <input type="file" id="file-2" accept=".csv,.txt,.pdf" style="display:none" onchange="handleFile(event,2)"/>
         <div class="upload-emoji">📄</div>
-        <div class="upload-title">Click or drag a CSV file here</div>
+        <div class="upload-title">Click or drag a CSV or PDF file here</div>
         <div class="upload-sub">Upload a second account to see the full combined picture</div>
         <div class="upload-fname" id="fname-2"></div>
       </div>
@@ -1253,7 +1253,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div id="stmt-empty" style="text-align:center;padding:48px;color:var(--muted)">
     <div style="font-size:36px;margin-bottom:12px">📊</div>
     <div style="font-size:15px;font-weight:700;margin-bottom:6px">No statements uploaded yet</div>
-    <div style="font-size:13px">Upload a CSV file above to see your spending broken down against the budget.</div>
+    <div style="font-size:13px">Upload a CSV or PDF statement above to see your spending broken down against the budget.</div>
   </div>
 </div>
 
@@ -1609,10 +1609,10 @@ const CAT_RULES = [
   ['Internet/Streaming',['netflix','hulu','disney+','disney plus','spectrum','comcast','xfinity','peacock','paramount','hbo max','apple tv','amazon prime video','youtube premium','sling','fubo','directv']],
   ['Phone',             ['verizon','t-mobile','at&t wireless','sprint','cricket','boost mobile','metro pcs','us cellular']],
   ['Subscriptions',     ['amazon prime','apple one','spotify','pandora','audible','adobe','microsoft 365','google one','dropbox','icloud','playstation plus','xbox game','nintendo online','steam']],
-  ['Entertainment',     ['amc','regal','cinemark','movie','bowling','topgolf','dave & buster','escape room','ticketmaster','eventbrite','putt-putt']],
+  ['Entertainment',     ['amc','regal','cinemark','movie','bowling alley','bowling lane','bowlero','topgolf','dave & buster','escape room','ticketmaster','eventbrite','putt-putt']],
   ['Gym',               ['planet fitness','ymca','gold\'s gym','anytime fitness','la fitness','crunch fitness','orangetheory']],
   ['Clothing',          ['old navy','gap','h&m','tj maxx','marshalls','ross ','kohls','jcpenney','macy','shein','forever 21','burlington','rue21']],
-  ['Income',            ['payroll','direct dep','salary','wages','transfer from','zelle from','venmo','tax refund','ach credit','deposit']],
+  ['Income',            ['payroll','direct dep','salary','wages','transfer from','zelle from','tax refund','ach credit']],
 ];
 
 function categorize(desc) {
@@ -1987,6 +1987,137 @@ function parseCSV(text) {
 }
 
 // ═══════════════════════════════════════════
+// PDF STATEMENT PARSER  (runs entirely in your browser — the file never leaves this page)
+// ═══════════════════════════════════════════
+const PDFJS_VER = '3.11.174';
+let _pdfjsPromise;
+function ensurePdfJs() {
+  if (window.pdfjsLib) return Promise.resolve();
+  if (_pdfjsPromise) return _pdfjsPromise;
+  _pdfjsPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/' + PDFJS_VER + '/pdf.min.js';
+    s.onload = () => {
+      try {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/' + PDFJS_VER + '/pdf.worker.min.js';
+      } catch (e) {}
+      resolve();
+    };
+    s.onerror = () => reject(new Error('could not load the PDF reader (needs an internet connection the first time)'));
+    document.head.appendChild(s);
+  });
+  return _pdfjsPromise;
+}
+
+// Pull text out of a PDF, rebuilding visual lines from each text item's position.
+async function extractPdfText(file) {
+  await ensurePdfJs();
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+  const outLines = [];
+  for (let p = 1; p <= pdf.numPages; p++) {
+    const page = await pdf.getPage(p);
+    const content = await page.getTextContent();
+    const items = content.items.filter(it => it.str && it.str.trim() !== '');
+    // Top of page = high y; group items that share a y into one line, then order by x.
+    items.sort((a, b) => (b.transform[5] - a.transform[5]) || (a.transform[4] - b.transform[4]));
+    let line = [], lineY = null;
+    const flush = () => {
+      if (!line.length) return;
+      line.sort((a, b) => a.transform[4] - b.transform[4]);
+      outLines.push(line.map(it => it.str).join(' ').replace(/\s+/g, ' ').trim());
+      line = [];
+    };
+    items.forEach(it => {
+      const y = it.transform[5];
+      if (lineY === null || Math.abs(y - lineY) <= 3) { line.push(it); lineY = (lineY === null) ? y : lineY; }
+      else { flush(); line.push(it); lineY = y; }
+    });
+    flush();
+  }
+  return outLines.join('\n');
+}
+
+// Turn reconstructed statement text into transactions. Best-effort across bank layouts.
+const AMT_RE     = /(\()?\s*(-)?\s*\$?\s*(\d{1,3}(?:,\d{3})*\.\d{2})\s*(\))?\s*(CR|DR)?/gi;
+const DATE_RE    = /^\s*(?:\d{1,2}[\/\-]\d{1,2}(?:[\/\-]\d{2,4})?|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:,?\s*\d{4})?)/i;
+const ANYDATE_RE = /\b\d{1,2}[\/\-]\d{1,2}(?:[\/\-]\d{2,4})?\b|\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:,?\s*\d{4})?\b/gi;
+const CENTS_RE   = /\d[\d,]*\.\d{2}\b/;
+const SKIP_RE    = /beginning balance|ending balance|previous balance|new balance|balance forward|opening balance|closing balance|available balance|daily (?:ending )?balance/i;
+const STOP_RE    = /^(?:page \d|yearly summary|member services|error resolution|in case of errors|summary$|transactions$|account number)/i;
+const DEPOSIT_SECTION_RE  = /\b(deposits?|additions|credits|payments? received|money in|amounts? added)\b/i;
+const WITHDRAW_SECTION_RE = /\b(withdrawals?|debits|purchases|checks?|electronic|card|fees?|payments|money out|atm)\b/i;
+
+function parseStatementText(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const docHasBalance = lines.some(l => /\bbalance\b/i.test(l));
+  // Some banks (e.g. Chime) mark money-out with an inline "-$" and leave money-in unsigned;
+  // detect that so a bare amount can be read as a credit rather than defaulting to an expense.
+  const docUsesSignedAmounts =
+    /(?:-\s*\$?\s*\d[\d,]*\.\d{2})|(?:\(\s*\$?\s*\d[\d,]*\.\d{2}\s*\))|(?:\d[\d,]*\.\d{2}\s*(?:CR|DR)\b)/i.test(text);
+
+  // Group the text into blocks — one per line that starts with a date — absorbing the
+  // continuation lines that follow (wrapped descriptions, or an amount on its own row).
+  const blocks = [];
+  let cur = null, sectionSign = 0; // sectionSign: +1 inside a deposits list, -1 inside a withdrawals list
+  for (const line of lines) {
+    if (STOP_RE.test(line)) { cur = null; continue; }
+    if (DATE_RE.test(line)) {
+      if (SKIP_RE.test(line)) { cur = null; continue; }
+      cur = { date: line.match(DATE_RE)[0].trim(), text: line, sectionSign };
+      blocks.push(cur);
+    } else {
+      if (SKIP_RE.test(line)) { cur = null; continue; }
+      // A short, amount-free header line switches the deposit/withdrawal context.
+      if (!CENTS_RE.test(line) && line.length < 60) {
+        const lc = line.toLowerCase();
+        const dep = DEPOSIT_SECTION_RE.test(lc), wd = WITHDRAW_SECTION_RE.test(lc);
+        if (dep && !wd) { sectionSign = 1; continue; }
+        if (wd && !dep) { sectionSign = -1; continue; }
+      }
+      if (cur) cur.text += ' ' + line; // continuation of the current transaction
+    }
+  }
+
+  const txns = [];
+  for (const b of blocks) {
+    // Every currency amount in the block, in order, keeping any explicit sign.
+    const amounts = [];
+    for (const m of b.text.matchAll(AMT_RE)) {
+      const value = parseFloat(m[3].replace(/,/g, ''));
+      if (!isFinite(value)) continue;
+      let sign = 0;
+      if (m[1] === '(' || m[2] === '-' || m[4] === ')' || (m[5] || '').toUpperCase() === 'DR') sign = -1;
+      else if ((m[5] || '').toUpperCase() === 'CR') sign = 1;
+      amounts.push({ value, sign });
+    }
+    if (!amounts.length) continue;
+
+    // With a running-balance column the transaction figure is second-to-last; otherwise it's last.
+    const pick = (docHasBalance && amounts.length >= 2)
+      ? amounts[amounts.length - 2]
+      : amounts[amounts.length - 1];
+
+    // Description = block text with every amount and every date stripped out.
+    const desc = b.text.replace(AMT_RE, ' ').replace(ANYDATE_RE, ' ').replace(/\s+/g, ' ').trim();
+
+    // Sign priority: explicit marker → deposit/withdrawal section → inline-signed doc → keyword → expense.
+    let sign = pick.sign;
+    if (sign === 0) {
+      if (b.sectionSign) sign = b.sectionSign;
+      else if (docUsesSignedAmounts) sign = 1;
+      else sign = categorize(desc) === 'Income' ? 1 : -1;
+    }
+    const amount = sign * pick.value;
+    if (!amount) continue;
+
+    txns.push({ date: b.date, description: desc, amount, category: categorize(desc), account: '' });
+  }
+  return txns;
+}
+
+// ═══════════════════════════════════════════
 // STATEMENTS
 // ═══════════════════════════════════════════
 let stmtData = { 1:[], 2:[] };
@@ -2000,17 +2131,44 @@ function handleDrop(e, acct) {
 
 function handleFile(e, acct) { const f=e.target.files[0]; if(f) loadFile(f, acct); }
 
-function loadFile(file, acct) {
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const txns = parseCSV(ev.target.result);
+async function loadFile(file, acct) {
+  const zone = document.getElementById('zone-'+acct);
+  const fnameEl = document.getElementById('fname-'+acct);
+  const isPdf = /\.pdf$/i.test(file.name) || file.type === 'application/pdf';
+  try {
+    let txns;
+    if (isPdf) {
+      zone.classList.remove('loaded');
+      fnameEl.style.color = '';
+      fnameEl.textContent = '⏳ Reading PDF… (stays on your device)';
+      const text = await extractPdfText(file);
+      txns = parseStatementText(text);
+    } else {
+      const text = await file.text();
+      txns = parseCSV(text);
+    }
     txns.forEach(t => t.account = 'Account '+acct);
     stmtData[acct] = txns;
-    document.getElementById('zone-'+acct).classList.add('loaded');
-    document.getElementById('fname-'+acct).textContent = '✓ '+file.name+' ('+txns.length+' transactions)';
+    if (!txns.length) {
+      zone.classList.remove('loaded');
+      fnameEl.style.color = 'var(--red)';
+      fnameEl.textContent = '⚠︎ ' + file.name + ' — no transactions found. ' +
+        (isPdf ? 'This PDF may be scanned/image-only or use an unusual layout — try a CSV export if your bank offers one.'
+               : "Check that it's a transaction export.");
+      renderStatements();
+      return;
+    }
+    zone.classList.add('loaded');
+    fnameEl.style.color = '';
+    fnameEl.textContent = '✓ ' + file.name + ' (' + txns.length + ' transaction' +
+      (txns.length === 1 ? '' : 's') + (isPdf ? ' — review below' : '') + ')';
     renderStatements();
-  };
-  reader.readAsText(file);
+  } catch (err) {
+    zone.classList.remove('loaded');
+    fnameEl.style.color = 'var(--red)';
+    fnameEl.textContent = '⚠︎ Could not read ' + file.name + ': ' + ((err && err.message) || 'unknown error');
+    console.error(err);
+  }
 }
 
 function renderStatements() {
