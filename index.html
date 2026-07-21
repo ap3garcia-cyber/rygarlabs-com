@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 
 <!-- ============================================================
      RYGARLABS.COM — v2
@@ -33,29 +34,72 @@
 <meta name="twitter:description" content="Websites &amp; Google Business management for Bowling Green businesses. Built by hand."/>
 <meta name="twitter:image" content="https://rygarlabs.com/og-image.png"/>
 
-<!-- Local SEO: structured data so Google understands what + where you serve -->
+<!-- Local SEO: structured data so search + answer engines understand what + where you serve -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "RyGar Labs",
-  "url": "https://rygarlabs.com",
-  "email": "contact@rygarlabs.com",
-  "description": "Independent studio building custom websites and native iOS apps, and managing Google Business profiles for local businesses.",
-  "areaServed": [
-    { "@type": "City", "name": "Bowling Green", "containedInPlace": { "@type": "State", "name": "Kentucky" } },
-    { "@type": "State", "name": "Kentucky" }
-  ],
-  "priceRange": "$$",
-  "knowsAbout": ["Web design", "Website development", "iOS app development", "Google Business Profile management", "Local SEO"]
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://rygarlabs.com/#studio",
+      "name": "RyGar Labs",
+      "url": "https://rygarlabs.com",
+      "email": "contact@rygarlabs.com",
+      "logo": "https://rygarlabs.com/apple-touch-icon.png",
+      "image": "https://rygarlabs.com/og-image.png",
+      "description": "Independent studio building custom websites and native iOS apps, and managing Google Business profiles for local businesses.",
+      "areaServed": [
+        { "@type": "City", "name": "Bowling Green", "containedInPlace": { "@type": "State", "name": "Kentucky" } },
+        { "@type": "State", "name": "Kentucky" }
+      ],
+      "priceRange": "$$",
+      "sameAs": [
+        "https://apps.apple.com/us/app/asideo/id6773941568",
+        "https://asideo.rygarlabs.com"
+      ],
+      "knowsAbout": ["Web design", "Website development", "iOS app development", "Google Business Profile management", "Local SEO"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website design & development", "serviceType": "Web design", "provider": { "@id": "https://rygarlabs.com/#studio" }, "areaServed": { "@type": "State", "name": "Kentucky" } } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Business Profile management", "serviceType": "Local SEO", "provider": { "@id": "https://rygarlabs.com/#studio" }, "areaServed": { "@type": "State", "name": "Kentucky" } } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rygarlabs.com/#website",
+      "name": "RyGar Labs",
+      "url": "https://rygarlabs.com",
+      "publisher": { "@id": "https://rygarlabs.com/#studio" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rygarlabs.com/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Do I have to sign a contract?", "acceptedAnswer": { "@type": "Answer", "text": "No. Monthly plans are month-to-month — if it isn't working for you, stop with a week's notice. One-time builds use a simple one-page agreement so we both know exactly what's being made." } },
+        { "@type": "Question", "name": "Who owns the website when it's done?", "acceptedAnswer": { "@type": "Answer", "text": "You do. The domain, the code, the content, the accounts, and your customer list are yours from day one. I never hold a site hostage." } },
+        { "@type": "Question", "name": "I already have a website. Can you still help?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the growth plan works with whatever you already have. And if your site needs a refresh, I'll give you an honest read on whether it's worth updating or rebuilding." } },
+        { "@type": "Question", "name": "How soon will a growth plan make a difference?", "acceptedAnswer": { "@type": "Answer", "text": "The honest answer: Google Business work tends to show in the first month or two, while local search visibility compounds over three to six. Every month you get a recap so you can judge for yourself." } },
+        { "@type": "Question", "name": "Do you only work with Bowling Green businesses?", "acceptedAnswer": { "@type": "Answer", "text": "Bowling Green and the surrounding area is home base, and local clients get in-person time. But websites and apps travel fine — I take remote projects too." } },
+        { "@type": "Question", "name": "Why work with a one-person studio instead of an agency?", "acceptedAnswer": { "@type": "Answer", "text": "You talk to the person doing the work — the same one who designed, built, and shipped a live App Store app. No account managers, no handoffs, and no agency overhead in the middle." } }
+      ]
+    }
+  ]
 }
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- self-hosted variable fonts — no third-party CDN (privacy + one fewer connection) -->
+<link rel="preload" href="/assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin/>
 
 <style>
+/* self-hosted variable fonts (latin subset, font-display:swap) — replaces Google Fonts CDN */
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:swap;src:url('/assets/fonts/space-grotesk.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/inter.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2')}
 :root{
   --bg:#0a0a0c;
   --bg-2:#101014;
@@ -64,7 +108,7 @@
   --line-soft:#1a1a20;
   --text:#ececf0;
   --text-2:#9b9ba6;
-  --text-3:#5e5e6a;
+  --text-3:#7c7c88;         /* raised from #5e5e6a to meet WCAG AA (~4.8:1 on bg) */
   --amber:#e3a14f;          /* growth-services accent */
   --amber-soft:rgba(227,161,79,.12);
   --green:#5fbf7a;
@@ -80,6 +124,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16
 img{max-width:100%;display:block;border-radius:10px}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+/* a11y: skip link, screen-reader-only headings, anchor offset under the sticky nav */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:fixed;left:12px;top:-64px;z-index:100;background:var(--amber);color:#1b1206;font-family:var(--mono);font-size:13px;padding:10px 16px;border-radius:8px;transition:top .18s ease}
+.skip:focus{top:12px}
+:where(section,.hero){scroll-margin-top:84px}
+address{font-style:normal}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
 section{padding:96px 0;border-top:1px solid var(--line-soft)}
 h1,h2,h3,h4{font-family:var(--display);line-height:1.12;letter-spacing:-.015em}
@@ -138,7 +188,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.82);backdrop-filt
 .local-grid{margin-top:52px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .local-item{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--bg-2)}
 .local-item .ic{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:14px}
-.local-item h4{font-size:17px;margin-bottom:8px}
+.local-item h3{font-size:17px;margin-bottom:8px}
 .local-item p{font-size:14.5px;color:var(--text-2)}
 @media(max-width:980px){.local-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.local-grid{grid-template-columns:1fr}}
@@ -200,7 +250,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.82);backdrop-filt
 .steps{margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .step{border-top:2px solid var(--line);padding-top:20px}
 .step .n{font-family:var(--mono);font-size:12px;color:var(--amber)}
-.step h4{font-size:17px;margin:10px 0 8px}
+.step h3{font-size:17px;margin:10px 0 8px}
 .step p{font-size:14.5px;color:var(--text-2)}
 @media(max-width:920px){.steps{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:540px){.steps{grid-template-columns:1fr}}
@@ -209,7 +259,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.82);backdrop-filt
 .disc{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .disc-item{border:1px solid var(--line);border-radius:14px;padding:26px;background:var(--bg-2)}
 .disc-item .glyph{font-family:var(--mono);color:var(--text-3);font-size:15px;margin-bottom:16px}
-.disc-item h4{font-size:17px;margin-bottom:8px}
+.disc-item h3{font-size:17px;margin-bottom:8px}
 .disc-item p{font-size:14.5px;color:var(--text-2)}
 @media(max-width:860px){.disc{grid-template-columns:1fr}}
 
@@ -243,6 +293,65 @@ footer{border-top:1px solid var(--line-soft);padding:36px 0;font-family:var(--mo
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
+/* ── hero low-friction reassurance ── */
+.hero-reassure{margin-top:22px;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--text-3);max-width:54ch}
+.hero-reassure b{color:var(--text-2);font-weight:500}
+
+/* ── problem-first (the gap) ── */
+.problem h2{font-size:clamp(30px,4.4vw,44px);max-width:20ch}
+.problem h2 em{font-style:normal;color:var(--amber)}
+.problem-lede{margin-top:20px;max-width:60ch;color:var(--text-2);font-size:17.5px}
+.problem-grid{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.problem-item{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--bg-2)}
+.problem-item .px-ic{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.14em}
+.problem-item h3{font-size:17px;margin:12px 0 8px}
+.problem-item p{font-size:14.5px;color:var(--text-2)}
+.problem-turn{margin-top:38px;font-size:17px;color:var(--text);max-width:60ch}
+.problem-turn a{color:var(--amber);white-space:nowrap}
+.problem-turn a:hover{text-decoration:underline}
+@media(max-width:560px){.problem-grid{grid-template-columns:1fr}}
+
+/* ── outcome benefits strip ── */
+.benefits{list-style:none;margin:44px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.benefits li{font-size:14.5px;color:var(--text);border:1px solid var(--line);border-radius:99px;padding:9px 17px 9px 35px;position:relative;background:var(--bg-2)}
+.benefits li::before{content:"✓";position:absolute;left:16px;top:9px;color:var(--amber);font-weight:600;font-family:var(--mono);font-size:13px}
+
+/* ── best-for tags (self-select pricing) ── */
+.self-select{margin-top:14px;color:var(--text-3);font-size:15px;max-width:62ch}
+.best-for{margin-top:18px;font-family:var(--mono);font-size:12.5px;letter-spacing:.01em;color:var(--text-3)}
+.best-for b{color:var(--amber);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px}
+.sheet-desc .bf{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--amber);text-transform:uppercase;margin-bottom:7px;font-weight:500}
+
+/* ── instant quote intake form ── */
+.quote h2{font-size:clamp(30px,4.4vw,44px);max-width:20ch}
+.quote-intro{margin-top:18px;color:var(--text-2);max-width:60ch;font-size:17.5px}
+.qform{margin-top:44px;max-width:840px;border:1px solid var(--line);border-radius:16px;padding:36px;background:var(--bg-2)}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px 22px}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field.full{grid-column:1 / -1}
+.field label{font-size:13.5px;color:var(--text-2);font-weight:500}
+.field .req{color:var(--amber);margin-left:2px}
+.field input,.field select,.field textarea{font-family:var(--body);font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;width:100%;transition:border-color .15s ease}
+.field textarea{min-height:118px;resize:vertical;line-height:1.55}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-3)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--amber)}
+.field select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%239b9ba6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M1 1.75 6 6.25 11 1.75'/></svg>");
+  background-repeat:no-repeat;background-position:right 15px center}
+.field select:invalid{color:var(--text-3)}
+.qform-foot{margin-top:28px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.qform-foot .btn-amber:disabled{opacity:.6;cursor:default}
+.qnote{font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--text-3);max-width:38ch}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qmsg{max-width:840px;margin-top:22px;font-size:15.5px;line-height:1.6;padding:20px 22px;border-radius:14px;display:none}
+.qmsg.show{display:block}
+.qmsg h4{font-family:var(--display);font-size:18px;margin-bottom:6px}
+#q-ok{border:1px solid var(--green);background:rgba(95,191,122,.09);color:var(--text)}
+#q-err{border:1px solid #c9614f;background:rgba(201,97,79,.09);color:var(--text-2)}
+#q-err a{color:var(--amber)}
+#q-err a:hover{text-decoration:underline}
+@media(max-width:640px){.qgrid{grid-template-columns:1fr}.qform{padding:26px 20px}}
+
 /* ════════════════════════════════════════════════════════════
    LIVING HUD  (added — fixed ambient layer + hero reactor)
    ▸ #jv-bg = ambient holographic background behind the whole page.
@@ -252,7 +361,7 @@ footer{border-top:1px solid var(--line-soft);padding:36px 0;font-family:var(--mo
   --jv-cyan:#3cc8ff; --jv-cyan-bright:#cdf3ff; --jv-cyan-dim:rgba(60,200,255,.42); --jv-white:#eefcff;
 }
 /* stacking: real content sits ABOVE the fixed HUD */
-nav,.hero,section,footer{position:relative;z-index:1}
+nav,.hero,section,footer,main{position:relative;z-index:1}
 /* translucent scrims so the HUD glows through but text stays readable */
 section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 .pricing{background:rgba(9,12,16,.62)}
@@ -422,6 +531,8 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
 </head>
 <body>
 
+<a class="skip" href="#main">Skip to content</a>
+
 <!-- ░░░ AMBIENT HUD — fixed behind the whole page ░░░ -->
 <div id="jv-bg" aria-hidden="true">
   <div class="jv-ambient">
@@ -474,9 +585,11 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
       <a href="#pricing">Plans</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a class="nav-cta" href="#contact">Get in touch</a>
+    <a class="nav-cta" href="#quote">Get a quote</a>
   </div>
 </nav>
+
+<main id="main" tabindex="-1">
 
 <header class="hero wrap" id="top">
 
@@ -572,14 +685,16 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
     <h1>Software that earns its space. <em>Growth that earns its keep.</em></h1>
     <p>RyGar Labs is an independent studio in Bowling Green, Kentucky. I design and build high-craft websites end to end, and manage the Google Business profiles that keep local businesses visible to the people searching for them. The same hands that shipped a native iOS app to the App Store go into every project — one person, no handoffs, no template starts.</p>
     <div class="hero-ctas">
-      <a class="btn btn-amber" href="#growth">Explore services</a>
+      <a class="btn btn-amber" href="#quote">Get an instant quote</a>
       <a class="btn btn-ghost" href="#work">See the work</a>
     </div>
+    <p class="hero-reassure">No commitment to start. Tell me what you do and what's not working, and you'll get a <b>straight answer — usually with a rough quote — within a day.</b></p>
   </div>
 </header>
 
 <section id="work" class="wrap">
   <p class="eyebrow">/ <b>01</b> — selected work</p>
+  <h2 class="sr-only">Selected work</h2>
   <div class="work-card rv">
     <div class="work-phone">
       <video id="asideo-demo" class="work-video" muted loop playsinline preload="metadata" poster="assets/asideo-poster.jpg" width="540" height="960" aria-label="Asideo app preview">
@@ -598,30 +713,51 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
   </div>
 </section>
 
+<section id="gap" class="wrap problem">
+  <p class="eyebrow">/ <b>02</b> — the gap</p>
+  <h2 class="rv">Your business is better than your website <em>lets on.</em></h2>
+  <p class="problem-lede rv">Plenty of great local businesses lose customers before they ever call — not because of the work, but because of what happens (or doesn't) online. Any of these sound familiar?</p>
+  <div class="problem-grid">
+    <div class="problem-item rv"><span class="px-ic">[ 01 ]</span><h3>Hard to find on Google</h3><p>Someone searches your line of work in town and your competitors come up first. You're there — just not where people are actually looking.</p></div>
+    <div class="problem-item rv"><span class="px-ic">[ 02 ]</span><h3>Slow or clunky on a phone</h3><p>Most of your visitors are on their phone. If the site is slow or awkward to read, they're gone before they ever see how good you are.</p></div>
+    <div class="problem-item rv"><span class="px-ic">[ 03 ]</span><h3>No obvious next step</h3><p>People land, can't tell how to book you or reach you, and leave. A confusing layout quietly costs you the call.</p></div>
+    <div class="problem-item rv"><span class="px-ic">[ 04 ]</span><h3>A Google profile gone quiet</h3><p>Good reviews, but nothing posted in months and questions left hanging. An untouched profile reads as "maybe closed."</p></div>
+  </div>
+  <p class="problem-turn rv">None of that is a reflection of your work — it's just the digital side going unattended. That's exactly the part I handle. <a href="#growth">Here's how →</a></p>
+</section>
+
 <section id="growth" class="wrap local">
-  <p class="eyebrow">/ <b>02</b> — services</p>
+  <p class="eyebrow">/ <b>03</b> — services</p>
   <h2 class="rv">The digital side, handled.</h2>
   <p class="local-lede rv">Most great Bowling Green businesses run on word of mouth and Google reviews. RyGar Labs takes care of the digital side — your website and your Google profile — so you can stay focused on the work you're known for. Plain English, and one local person you can actually reach.</p>
   <div class="local-grid">
     <div class="local-item rv">
       <p class="ic">[ &lt;/&gt; ]</p>
-      <h4>Websites</h4>
+      <h3>Websites</h3>
       <p>A fast, mobile-first website built by hand for your business — no templates, no page-builders — with room to grow into something more custom when you're ready.</p>
     </div>
     <div class="local-item rv">
       <p class="ic">[ ★ ]</p>
-      <h4>Google Business management</h4>
+      <h3>Google Business management</h3>
       <p>Your Google profile kept current — photos, posts, hours, and considered responses to every review, good or bad — so you show up when locals search.</p>
     </div>
   </div>
+  <ul class="benefits rv">
+    <li>Fast on every phone</li>
+    <li>Easy to find on Google</li>
+    <li>Clear on what to do next</li>
+    <li>Built to turn visitors into calls</li>
+    <li>Yours to keep — always</li>
+  </ul>
   <p class="fit rv"><b>A good fit for:</b> restaurants &amp; cafés · contractors &amp; home services · boutiques &amp; retail · makers &amp; local brands · anyone whose work is better than their web presence.</p>
 </section>
 
 <section id="pricing" class="pricing">
   <div class="wrap">
-    <p class="eyebrow">/ <b>03</b> — plans &amp; builds</p>
-    <h2 class="rv">Two ways to work together.</h2>
+    <p class="eyebrow">/ <b>04</b> — plans &amp; builds</p>
+    <h2 class="rv">Which one is right for you?</h2>
     <p class="pricing-sub rv">An ongoing growth plan, or a one-time build you own outright. Both are built around your business — and everything I make for you, from your site to your content to your accounts, is yours to keep.</p>
+    <p class="self-select rv">Not sure which fits? Each option below says who it's best for — find the line that sounds like you.</p>
 
     <!-- ====== EDIT PRICES: growth plan ====== -->
     <div class="plan rv">
@@ -630,6 +766,7 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
         <p class="plan-price">from <b>$200</b><small>/mo</small></p>
       </div>
       <p class="plan-lede">Ongoing Google Business management to keep your profile active and your reviews answered — plus optional website care so your site stays fast and current. No bundles to decode, just the work that moves the needle for you.</p>
+      <p class="best-for"><b>Best for</b> businesses that are already open and need to stay visible, current, and answered month to month.</p>
       <ul class="plan-list">
         <li>Google Business profile kept current</li>
         <li>Regular posts, photos &amp; hours updated</li>
@@ -656,13 +793,13 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
         </div>
         <div class="sheet-row">
           <span class="sheet-name">Launch Site<small>BUILD / 01</small></span>
-          <span class="sheet-desc">A sharp single-page site: your story, services, photos, reviews, hours, and a contact path that works. A strong first web presence.</span>
+          <span class="sheet-desc"><b class="bf">Best for getting online fast</b>A sharp single-page site: your story, services, photos, reviews, hours, and a contact path that works. A strong first web presence.</span>
           <span class="sheet-time">~1 week</span>
           <span class="sheet-price">$650<small>one-time</small></span>
         </div>
         <div class="sheet-row">
           <span class="sheet-name">Business Site<small>BUILD / 02</small></span>
-          <span class="sheet-desc">Up to five pages — home, services, about, gallery, contact — with lead-capture forms and Google Maps. Room to grow.</span>
+          <span class="sheet-desc"><b class="bf">Best for room to grow</b>Up to five pages — home, services, about, gallery, contact — with lead-capture forms and Google Maps. Built to expand.</span>
           <span class="sheet-time">2–3 weeks</span>
           <span class="sheet-price">$1,500<small>one-time</small></span>
         </div>
@@ -683,26 +820,29 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
 </section>
 
 <section class="wrap">
-  <p class="eyebrow">/ <b>04</b> — how it works</p>
+  <p class="eyebrow">/ <b>05</b> — how it works</p>
+  <h2 class="sr-only">How it works</h2>
   <div class="steps">
-    <div class="step rv"><p class="n">STEP 1</p><h4>Quick chat</h4><p>Email me or grab a call. Fifteen minutes to understand your business and what "working" looks like for you.</p></div>
-    <div class="step rv"><p class="n">STEP 2</p><h4>Plain-English plan</h4><p>You get a one-page proposal: exactly what I'll do and when it lands. No jargon, no padding.</p></div>
-    <div class="step rv"><p class="n">STEP 3</p><h4>I build, you approve</h4><p>You see real progress, not status meetings. Nothing goes live without your sign-off.</p></div>
-    <div class="step rv"><p class="n">STEP 4</p><h4>Launch &amp; grow</h4><p>Your site ships, your plan runs, and you get a monthly recap of what it did — in plain terms, not buzzwords.</p></div>
+    <div class="step rv"><p class="n">STEP 1</p><h3>Quick chat</h3><p>Email me or grab a call. Fifteen minutes to understand your business and what "working" looks like for you.</p></div>
+    <div class="step rv"><p class="n">STEP 2</p><h3>Plain-English plan</h3><p>You get a one-page proposal: exactly what I'll do and when it lands. No jargon, no padding.</p></div>
+    <div class="step rv"><p class="n">STEP 3</p><h3>I build, you approve</h3><p>You see real progress, not status meetings. Nothing goes live without your sign-off.</p></div>
+    <div class="step rv"><p class="n">STEP 4</p><h3>Launch &amp; grow</h3><p>Your site ships, your plan runs, and you get a monthly recap of what it did — in plain terms, not buzzwords.</p></div>
   </div>
 </section>
 
 <section class="wrap">
-  <p class="eyebrow">/ <b>05</b> — the studio</p>
+  <p class="eyebrow">/ <b>06</b> — the studio</p>
+  <h2 class="sr-only">The studio</h2>
   <div class="disc">
-    <div class="disc-item rv"><p class="glyph">{ }</p><h4>Native iOS, shipped</h4><p>Asideo — SwiftUI, App Intents, and Apple Intelligence, submitted to the App Store end to end. The craft standard behind every project here.</p></div>
-    <div class="disc-item rv"><p class="glyph">&lt;/&gt;</p><h4>Web design &amp; build</h4><p>Marketing sites and product landing pages, designed and shipped — no template-store finishes.</p></div>
-    <div class="disc-item rv"><p class="glyph">◊</p><h4>Product direction</h4><p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p></div>
+    <div class="disc-item rv"><p class="glyph">{ }</p><h3>Native iOS, shipped</h3><p>Asideo — SwiftUI, App Intents, and Apple Intelligence, submitted to the App Store end to end. The craft standard behind every project here.</p></div>
+    <div class="disc-item rv"><p class="glyph">&lt;/&gt;</p><h3>Web design &amp; build</h3><p>Marketing sites and product landing pages, designed and shipped — no template-store finishes.</p></div>
+    <div class="disc-item rv"><p class="glyph">◊</p><h3>Product direction</h3><p>Concept refinement, scope shaping, and the taste-level review that separates good from done.</p></div>
   </div>
 </section>
 
 <section id="faq" class="wrap">
-  <p class="eyebrow">/ <b>06</b> — questions, answered</p>
+  <p class="eyebrow">/ <b>07</b> — questions, answered</p>
+  <h2 class="sr-only">Questions, answered</h2>
   <div class="faq-list">
     <details class="rv">
       <summary>Do I have to sign a contract?</summary>
@@ -731,14 +871,109 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
   </div>
 </section>
 
+<section id="quote" class="wrap quote">
+  <p class="eyebrow">/ <b>08</b> — instant quote</p>
+  <h2 class="rv">Tell me what you need. Get a quote.</h2>
+  <p class="quote-intro rv">A few quick questions about your business and what you're after. It takes about a minute, there's no commitment, and I'll come back to you — usually within a day — with an honest read and a rough quote.</p>
+
+  <!-- ============================================================
+       INSTANT QUOTE FORM — powered by Web3Forms (web3forms.com)
+       ▸ SETUP (one time): get a free access key at
+         https://web3forms.com  (enter contact@rygarlabs.com — the key
+         is emailed to you), then paste it into the value="" of the
+         hidden "access_key" input below, replacing PASTE_YOUR_KEY_HERE.
+       ▸ Submissions email to whatever address the key is tied to.
+       ▸ No account/dashboard needed; free tier = 250 submissions/mo.
+       ============================================================ -->
+  <form id="quote-form" class="qform rv" novalidate>
+    <input type="hidden" name="access_key" value="PASTE_YOUR_KEY_HERE"/>
+    <input type="hidden" name="from_name" value="RyGar Labs — Instant Quote"/>
+    <!-- honeypot: real people never fill this; bots do -->
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+
+    <div class="qgrid">
+      <div class="field">
+        <label for="q-business">Business name <span class="req" aria-hidden="true">*</span></label>
+        <input id="q-business" name="business" type="text" required autocomplete="organization" placeholder="e.g. Smitty's Auto Glass"/>
+      </div>
+      <div class="field">
+        <label for="q-name">Your name <span class="req" aria-hidden="true">*</span></label>
+        <input id="q-name" name="name" type="text" required autocomplete="name" placeholder="Who I'll be talking to"/>
+      </div>
+      <div class="field">
+        <label for="q-email">Email <span class="req" aria-hidden="true">*</span></label>
+        <input id="q-email" name="email" type="email" required autocomplete="email" placeholder="Where I'll send your quote"/>
+      </div>
+      <div class="field">
+        <label for="q-phone">Phone <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="If you'd rather I call"/>
+      </div>
+      <div class="field">
+        <label for="q-need">What do you need? <span class="req" aria-hidden="true">*</span></label>
+        <select id="q-need" name="need" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option>A brand-new website</option>
+          <option>A refresh of my current website</option>
+          <option>Google Business profile management</option>
+          <option>A website + Google management</option>
+          <option>Not sure yet — help me figure it out</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="q-current">Current website <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <input id="q-current" name="current_site" type="text" placeholder="yourbusiness.com — or 'none yet'"/>
+      </div>
+      <div class="field">
+        <label for="q-budget">Rough budget <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <select id="q-budget" name="budget">
+          <option value="" disabled selected>No idea? That's fine — pick or skip</option>
+          <option>Not sure yet</option>
+          <option>Under $750</option>
+          <option>$750 – $1,500</option>
+          <option>$1,500 – $3,000</option>
+          <option>$3,000+</option>
+          <option>Monthly plan instead</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="q-timeline">Timeline <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <select id="q-timeline" name="timeline">
+          <option value="" disabled selected>When would you like this?</option>
+          <option>As soon as possible</option>
+          <option>In the next 1–3 months</option>
+          <option>Just exploring for now</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="q-details">Anything else? <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <textarea id="q-details" name="details" placeholder="What's not working with your current setup, or what you're hoping this does for the business. The more I know, the sharper the quote."></textarea>
+      </div>
+    </div>
+
+    <div class="qform-foot">
+      <button id="q-submit" class="btn btn-amber" type="submit">Get my quote →</button>
+      <p class="qnote">No commitment. Your details come straight to me — no sales list, no spam, ever.</p>
+    </div>
+  </form>
+
+  <div id="q-ok" class="qmsg" role="status" aria-live="polite">
+    <h4>Got it — thank you.</h4>
+    Your details are on their way to me. I'll take a look and get back to you personally, usually within a day, with an honest read and a rough quote. — Ryan
+  </div>
+  <div id="q-err" class="qmsg" role="alert">
+    <h4>Hmm — that didn't go through.</h4>
+    Something on my end hiccuped. Please email me directly at <a href="mailto:contact@rygarlabs.com?subject=Quote%20request">contact@rygarlabs.com</a> and I'll take care of you.
+  </div>
+</section>
+
 <section id="contact" class="wrap contact">
-  <p class="eyebrow">/ <b>07</b> — start something</p>
+  <p class="eyebrow">/ <b>09</b> — prefer to just email?</p>
   <h2 class="rv">Let's talk about your business.</h2>
   <p class="contact-sub rv">Tell me what you do and what's not working. You'll get a straight answer about whether I can help and how I'd approach it.</p>
-  <div class="mail-row rv">
+  <address class="mail-row rv">
     <a class="mail" href="mailto:contact@rygarlabs.com">contact@rygarlabs.com</a>
     <button class="copy-btn" id="copyEmail" type="button">Copy</button>
-  </div>
+  </address>
   <div class="quick rv">
     <a href="mailto:contact@rygarlabs.com?subject=Growth%20plan%20inquiry%20%E2%80%94%20%5Byour%20business%20name%5D">Ask about a growth plan</a>
     <a href="mailto:contact@rygarlabs.com?subject=Website%20build%20inquiry%20%E2%80%94%20%5Byour%20business%20name%5D">Ask about a website</a>
@@ -746,6 +981,8 @@ section{background:rgba(7,10,14,.52);backdrop-filter:blur(3px);-webkit-backdrop-
   </div>
   <p class="contact-note">Typically replies within 24 hours · Bowling Green, KY</p>
 </section>
+
+</main>
 
 <footer class="wrap">
   <span>© 2026 RyGar Labs // built by hand</span>
@@ -772,6 +1009,46 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); }
   });},{threshold:.35});
   vio.observe(v);
+})();
+
+// instant-quote form → Web3Forms (AJAX, inline success/error)
+(function(){
+  var form = document.getElementById('quote-form');
+  if(!form) return;
+  var ok  = document.getElementById('q-ok');
+  var err = document.getElementById('q-err');
+  var btn = document.getElementById('q-submit');
+  var loadedAt = Date.now();                  // for the bot min-time check
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    err.classList.remove('show');
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    var data = Object.fromEntries(new FormData(form).entries());
+    if(data.botcheck){ return; }                 // honeypot: silently drop bots
+    if(Date.now() - loadedAt < 2000){ return; }  // implausibly fast submit → bot
+    var biz = (data.business||'').trim();
+    data.subject = 'New quote request' + (biz ? ' — ' + biz : '') + ' (rygarlabs.com)';
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j && j.success){
+        form.style.display='none';
+        ok.classList.add('show');
+        ok.scrollIntoView({behavior:'smooth', block:'center'});
+      } else { throw new Error((j && j.message) || 'submit failed'); }
+    })
+    .catch(function(){
+      btn.disabled=false; btn.textContent=label;
+      err.classList.add('show');
+      err.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
 })();
 </script>
 

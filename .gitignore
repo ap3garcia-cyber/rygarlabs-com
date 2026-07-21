@@ -1,0 +1,3 @@
+# local scratch / backups — never deploy
+*.bak
+intro-preview.html
